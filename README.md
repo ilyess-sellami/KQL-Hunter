@@ -1,4 +1,5 @@
 # KQL-Hunter
+**Threat Hunting KQL Queries for Microsoft Sentinel, Aligned with MITRE ATT&CK**
 
 ---
 
