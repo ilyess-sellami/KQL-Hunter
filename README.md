@@ -46,7 +46,7 @@ With KQL Hunter, you can:
 
 ![MITRE ATT&CK Framework](docs/MITRE.png)
 
-**MITRE ATT&CK** is a globally adopted knowledge base of **adversary tactics**, **techniques**, and **procedures (TTPs)** based on real-world attacks.
+**[MITRE ATT&CK](https://attack.mitre.org)** is a globally adopted knowledge base of **adversary tactics**, **techniques**, and **procedures (TTPs)** based on real-world attacks.
 
 KQL Hunter aligns each hunting query with relevant MITRE ATT&CK tactics and techniques, enabling defenders to:
 
@@ -57,6 +57,6 @@ KQL Hunter aligns each hunting query with relevant MITRE ATT&CK tactics and tech
 
 Each query includes references such as:
 
-- Tactic (e.g., Initial Access, Execution)
-- Technique ID (e.g., T1059.001)
-- Technique name
+- **Tactic** (e.g., Initial Access, Execution)
+- **Technique ID** (e.g., T1059)
+- **Technique name**
