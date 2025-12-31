@@ -90,6 +90,26 @@ KQL-Hunter/
 ```
 
 ---
+
+## MITRE ATT&CK Coverage
+
+Each folder under `queries/` represents a MITRE ATT&CK tactic and contains related KQL hunting queries.
+
+| MITRE ATT&CK Tactic  | Folder Name             | Description                                    |
+| -------------------- | ----------------------- | ---------------------------------------------- |
+| Initial Access       | `initial-access/`       | Detect phishing, brute-force, exposed services |
+| Execution            | `execution/`            | PowerShell, CMD, script execution              |
+| Persistence          | `persistence/`          | Registry, scheduled tasks, startup abuse       |
+| Privilege Escalation | `privilege-escalation/` | UAC bypass, token abuse                        |
+| Defense Evasion      | `defense-evasion/`      | Obfuscation, logging disable                   |
+| Credential Access    | `credential-access/`    | LSASS, password spraying                       |
+| Discovery            | `discovery/`            | Network, account, system discovery             |
+| Lateral Movement     | `lateral-movement/`     | SMB, RDP, remote execution                     |
+| Command and Control  | `command-and-control/`  | Beaconing, suspicious outbound traffic         |
+| Exfiltration         | `exfiltration/`         | Data transfer anomalies                        |
+
+---
+
 ## License
 
 This project is licensed under the **[MIT License](LICENSE)**.
