@@ -18,6 +18,7 @@ Whether you are a security analyst, cyber enthusiast, or Purple Team practitione
 **[KQL (Kusto Query Language)](https://learn.microsoft.com/en/kusto/query/?view=microsoft-fabric)** is the query language for **Azure Log Analytics** and **Microsoft Sentinel**. It allows you to efficiently search and analyze structured log data for insights and threat hunting.  
 
 **Example KQL Query:**
+
 ```kql
 SecurityEvent
 | where EventID == 4625
@@ -60,3 +61,36 @@ Each query includes references such as:
 - **Tactic** (e.g., Initial Access, Execution)
 - **Technique ID** (e.g., T1059)
 - **Technique name**
+
+---
+
+## Project Structure
+
+The repository is organized to be **simple**, **scalable**, and **contribution-friendly**.
+
+```text
+KQL-Hunter/
+├── queries/
+│   ├── initial-access/
+│   ├── execution/
+│   ├── persistence/
+│   ├── privilege-escalation/
+│   ├── defense-evasion/
+│   ├── credential-access/
+│   ├── discovery/
+│   ├── lateral-movement/
+│   ├── command-and-control/
+│   └── exfiltration/
+├── docs/
+│   ├── KQL.png
+│   ├── Sentinel.png
+│   └── MITRE.png
+├── README.md
+└── LICENSE
+```
+
+---
+## License
+
+This project is licensed under the **[MIT License](LICENSE)**.
+You are free to use, modify, and share it with proper attribution.
