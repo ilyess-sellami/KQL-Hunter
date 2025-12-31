@@ -29,7 +29,7 @@ SecurityEvent
 
 ## Microsoft Sentinel
 
-![Microsoft Sentinel](docs/Microsoft-Sentinel.png)
+![Microsoft Sentinel](docs/Sentinel.png)
 
 **[Microsoft Sentinel](https://www.microsoft.com/en/security/business/siem-and-xdr/microsoft-sentinel)** is a **cloud-native SIEM/SOAR** that **uses KQL to analyze logs** across your environment.
 
