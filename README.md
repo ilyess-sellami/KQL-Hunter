@@ -1,6 +1,8 @@
 # KQL-Hunter
 **Threat Hunting KQL Queries for Microsoft Sentinel, Aligned with MITRE ATT&CK**
 
+![KQL](docs/KQL-Hunter.png)
+
 ---
 
 ## Overview
@@ -30,7 +32,7 @@ SecurityEvent
 
 ## Microsoft Sentinel
 
-![Microsoft Sentinel](docs/Sentinel.png)
+![Microsoft Sentinel](docs/Microsoft-Sentinel.png)
 
 **[Microsoft Sentinel](https://www.microsoft.com/en/security/business/siem-and-xdr/microsoft-sentinel)** is a **cloud-native SIEM/SOAR** that **uses KQL to analyze logs** across your environment.
 
@@ -82,8 +84,9 @@ KQL-Hunter/
 │   ├── command-and-control/
 │   └── exfiltration/
 ├── docs/
+│   ├── KQL-Hunter.png
 │   ├── KQL.png
-│   ├── Sentinel.png
+│   ├── Microsoft-Sentinel.png
 │   └── MITRE.png
 ├── README.md
 └── LICENSE
