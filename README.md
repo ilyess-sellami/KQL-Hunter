@@ -26,4 +26,16 @@ SecurityEvent
 
 ---
 
+## Microsoft Sentinel
+
+[Microsoft Sentinel](docs/Microsoft-Sentinel.png)
+
+**Microsoft Sentinel** is a **cloud-native SIEM/SOAR** that **uses KQL to analyze logs** across your environment.
+
+With KQL Hunter, you can:
+
+- Detect suspicious behavior
+- Build correlation rules
+- Map queries to MITRE ATT&CK tactics
+- Share and collaborate on hunting techniques
 
