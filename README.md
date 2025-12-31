@@ -14,7 +14,7 @@ Whether you are a security analyst, cyber enthusiast, or Purple Team practitione
 
 ![KQL](docs/KQL.png)
 
-**[KQL (Kusto Query Language)](https://learn.microsoft.com/en-us/kusto/query/?view=microsoft-fabric)** is the query language for **Azure Log Analytics** and **Microsoft Sentinel**. It allows you to efficiently search and analyze structured log data for insights and threat hunting.  
+**[KQL (Kusto Query Language)](https://learn.microsoft.com/en/kusto/query/?view=microsoft-fabric)** is the query language for **Azure Log Analytics** and **Microsoft Sentinel**. It allows you to efficiently search and analyze structured log data for insights and threat hunting.  
 
 **Example KQL Query:**
 ```kql
@@ -30,7 +30,7 @@ SecurityEvent
 
 ![Microsoft Sentinel](docs/Microsoft-Sentinel.png)
 
-**[Microsoft Sentinel](https://www.microsoft.com/ar/security/business/siem-and-xdr/microsoft-sentinel)** is a **cloud-native SIEM/SOAR** that **uses KQL to analyze logs** across your environment.
+**[Microsoft Sentinel](https://www.microsoft.com/en/security/business/siem-and-xdr/microsoft-sentinel)** is a **cloud-native SIEM/SOAR** that **uses KQL to analyze logs** across your environment.
 
 With KQL Hunter, you can:
 
