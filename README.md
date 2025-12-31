@@ -40,3 +40,23 @@ With KQL Hunter, you can:
 - Map queries to MITRE ATT&CK tactics
 - Share and collaborate on hunting techniques
 
+---
+
+## MITRE ATT&CK Framework
+
+![MITRE ATT&CK Framework](docs/MITRE.png)
+
+**MITRE ATT&CK** is a globally adopted knowledge base of **adversary tactics**, **techniques**, and **procedures (TTPs)** based on real-world attacks.
+
+KQL Hunter aligns each hunting query with relevant MITRE ATT&CK tactics and techniques, enabling defenders to:
+
+- Understand attacker behavior
+- Map detections to adversary techniques
+- Improve threat coverage and reporting
+- Support Purple Team and threat modeling activities
+
+Each query includes references such as:
+
+- Tactic (e.g., Initial Access, Execution)
+- Technique ID (e.g., T1059.001)
+- Technique name
