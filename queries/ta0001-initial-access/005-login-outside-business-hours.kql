@@ -1,0 +1,15 @@
+// Title: Login Outside Business Hours
+// Description: Detects successful sign-ins occurring outside normal working hours
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Low
+// References:
+// - https://attack.mitre.org/techniques/T1078/
+
+SigninLogs
+| where ResultType == 0
+| where datetime_part("hour", TimeGenerated) < 6
+    or datetime_part("hour", TimeGenerated) > 20
+| project TimeGenerated, UserPrincipalName, IPAddress, Location

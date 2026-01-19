@@ -1,0 +1,15 @@
+// Title: New IP Address Sign-in
+// Description: Detects successful sign-ins from IP addresses rarely used by the account
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+// References:
+// - https://attack.mitre.org/techniques/T1078/
+
+SigninLogs
+| where ResultType == 0
+| summarize LoginCount = count() by UserPrincipalName, IPAddress
+| where LoginCount < 3
+| sort by LoginCount
