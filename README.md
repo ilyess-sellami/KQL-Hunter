@@ -73,7 +73,7 @@ The repository is organized to be **simple**, **scalable**, and **contribution-f
 ```text
 KQL-Hunter/
 ├── queries/
-│   ├── [ta0001-initial-access/](/queries/ta0001-initial-access/README.md)
+│   ├── ta0001-initial-access/
 │   ├── ta0002-execution/
 │   ├── ta0003-persistence/
 │   ├── ta0004-privilege-escalation/
