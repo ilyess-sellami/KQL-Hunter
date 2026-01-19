@@ -73,16 +73,16 @@ The repository is organized to be **simple**, **scalable**, and **contribution-f
 ```text
 KQL-Hunter/
 ├── queries/
-│   ├── initial-access/
-│   ├── execution/
-│   ├── persistence/
-│   ├── privilege-escalation/
-│   ├── defense-evasion/
-│   ├── credential-access/
-│   ├── discovery/
-│   ├── lateral-movement/
-│   ├── command-and-control/
-│   └── exfiltration/
+│   ├── ta0001-initial-access/
+│   ├── ta0002-execution/
+│   ├── ta0003-persistence/
+│   ├── ta0004-privilege-escalation/
+│   ├── ta0005-defense-evasion/
+│   ├── ta0006-credential-access/
+│   ├── ta0007-discovery/
+│   ├── ta0008-lateral-movement/
+│   ├── ta0010-exfiltration/
+│   └── ta0011-command-and-control/
 ├── docs/
 │   ├── KQL-Hunter.png
 │   ├── KQL.png
@@ -100,16 +100,16 @@ Each folder under `queries/` represents a MITRE ATT&CK tactic and contains relat
 
 | MITRE ATT&CK Tactic  | Folder Name             | Description                                    |
 | -------------------- | ----------------------- | ---------------------------------------------- |
-| Initial Access       | `initial-access/`       | Detect phishing, brute-force, exposed services |
-| Execution            | `execution/`            | PowerShell, CMD, script execution              |
-| Persistence          | `persistence/`          | Registry, scheduled tasks, startup abuse       |
-| Privilege Escalation | `privilege-escalation/` | UAC bypass, token abuse                        |
-| Defense Evasion      | `defense-evasion/`      | Obfuscation, logging disable                   |
-| Credential Access    | `credential-access/`    | LSASS, password spraying                       |
-| Discovery            | `discovery/`            | Network, account, system discovery             |
-| Lateral Movement     | `lateral-movement/`     | SMB, RDP, remote execution                     |
-| Command and Control  | `command-and-control/`  | Beaconing, suspicious outbound traffic         |
-| Exfiltration         | `exfiltration/`         | Data transfer anomalies                        |
+| Initial Access       | `ta0001-initial-access/` | Detect phishing, brute-force, exposed services|
+| Execution            | `ta0002-execution/`     | PowerShell, CMD, script execution              |
+| Persistence          | `ta0003-persistence/`   | Registry, scheduled tasks, startup abuse       |
+| Privilege Escalation | `ta0004-privilege-escalation/` | UAC bypass, token abuse                 |
+| Defense Evasion      | `ta0005-defense-evasion/`      | Obfuscation, logging disable            |
+| Credential Access    | `ta0006-credential-access/`    | LSASS, password spraying                |
+| Discovery            | `ta0007-discovery/`     | Network, account, system discovery             |
+| Lateral Movement     | `ta0008-lateral-movement/`     | SMB, RDP, remote execution              |
+| Exfiltration         | `ta0010-exfiltration/`         | Data transfer anomalies                 |
+| Command and Control  | `ta0011-command-and-control/`  | Beaconing, suspicious outbound traffic  |
 
 ---
 
