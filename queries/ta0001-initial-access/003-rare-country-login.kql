@@ -1,0 +1,17 @@
+// Title: Rare Country Sign-in
+// Description: Detects successful sign-ins from countries rarely seen for a user
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+// References:
+// - https://attack.mitre.org/techniques/T1078/
+
+SigninLogs
+| where ResultType == 0
+| summarize LoginCount = count()
+    by UserPrincipalName, Country = tostring(LocationDetails.countryOrRegion)
+| where isnotempty(Country)
+| where LoginCount < 3
+| order by LoginCount asc
