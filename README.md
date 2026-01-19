@@ -100,16 +100,16 @@ Each folder under `queries/` represents a MITRE ATT&CK tactic and contains relat
 
 | MITRE ATT&CK Tactic  | Folder Name             | Description                                    |
 | -------------------- | ----------------------- | ---------------------------------------------- |
-| Initial Access       | `ta0001-initial-access/` | Detect phishing, brute-force, exposed services|
-| Execution            | `ta0002-execution/`     | PowerShell, CMD, script execution              |
-| Persistence          | `ta0003-persistence/`   | Registry, scheduled tasks, startup abuse       |
-| Privilege Escalation | `ta0004-privilege-escalation/` | UAC bypass, token abuse                 |
-| Defense Evasion      | `ta0005-defense-evasion/`      | Obfuscation, logging disable            |
-| Credential Access    | `ta0006-credential-access/`    | LSASS, password spraying                |
-| Discovery            | `ta0007-discovery/`     | Network, account, system discovery             |
-| Lateral Movement     | `ta0008-lateral-movement/`     | SMB, RDP, remote execution              |
-| Exfiltration         | `ta0010-exfiltration/`         | Data transfer anomalies                 |
-| Command and Control  | `ta0011-command-and-control/`  | Beaconing, suspicious outbound traffic  |
+| Initial Access       | [`ta0001-initial-access/`](/queries/ta0001-initial-access/README.md) | Detect phishing, brute-force, exposed services|
+| Execution            | [`ta0002-execution/`](/queries/ta0002-execution/README.md)     | PowerShell, CMD, script execution              |
+| Persistence          | [`ta0003-persistence/`](/queries/ta0003-persistence/README.md)   | Registry, scheduled tasks, startup abuse       |
+| Privilege Escalation | [`ta0004-privilege-escalation/`](/queries/ta0004-privilege-escalation/README.md) | UAC bypass, token abuse                 |
+| Defense Evasion      | [`ta0005-defense-evasion/`](/queries/ta0005-defense-evasion/README.md)      | Obfuscation, logging disable            |
+| Credential Access    | [`ta0006-credential-access/`](/queries/ta0006-credential-access/README.md)    | LSASS, password spraying                |
+| Discovery            | [`ta0007-discovery/`](/queries/ta0007-discovery/README.md)     | Network, account, system discovery             |
+| Lateral Movement     | [`ta0008-lateral-movement/`](/queries/ta0008-lateral-movement/README.md)     | SMB, RDP, remote execution              |
+| Exfiltration         | [`ta0010-exfiltration/`](/queries/ta0010-exfiltration/README.md)         | Data transfer anomalies                 |
+| Command and Control  | [`ta0011-command-and-control/`](/queries/ta0011-command-and-control/README.md)  | Beaconing, suspicious outbound traffic  |
 
 ---
 
