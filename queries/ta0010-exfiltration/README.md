@@ -29,6 +29,8 @@ Common techniques covered in this section include:
 
 Each query is **mapped directly to a MITRE Exfiltration technique**.
 
+---
+
 ## Top Data Sources for Exfiltration Hunting
 
 Exfiltration detection relies heavily on outbound network visibility:
