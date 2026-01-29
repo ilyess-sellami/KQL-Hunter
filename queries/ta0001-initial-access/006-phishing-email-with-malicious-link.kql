@@ -1,0 +1,15 @@
+// Title: Phishing Email with Malicious Link
+// Description: Detects emails containing URLs commonly used in phishing campaigns
+// Data Source: EmailEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1566.002 - Phishing: Link
+// Severity: Medium
+// References:
+// - https://attack.mitre.org/techniques/T1566/002/
+
+EmailEvents
+| where ThreatTypes has "Phish"
+    or ThreatTypes has "Malware"
+| where UrlCount > 0
+| project TimeGenerated, SenderFromAddress, RecipientEmailAddress, Subject, UrlCount, ThreatTypes
