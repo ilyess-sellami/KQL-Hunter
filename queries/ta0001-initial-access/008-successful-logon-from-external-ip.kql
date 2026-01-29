@@ -1,0 +1,19 @@
+// Title: Successful Logon from External IP
+// Description: Detects successful logons originating from public (non-private) IP addresses
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+// References:
+// - https://attack.mitre.org/techniques/T1078/
+
+SecurityEvent
+| where EventID == 4624
+| where LogonType in (3, 10) // Network, RDP
+| where not(IpAddress startswith "10.")
+  and not(IpAddress startswith "192.168.")
+  and not(IpAddress startswith "172.16.")
+  and not(IpAddress == "127.0.0.1")
+  and not(IpAddress == "::1")
+| project TimeGenerated, Account, LogonType, IpAddress, Computer
