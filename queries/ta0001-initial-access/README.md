@@ -1,7 +1,5 @@
 # TA0001 – Initial Access
 
----
-
 ## Overview
 
 **Initial Access** represents the techniques adversaries use to gain their **first foothold** into an environment. This stage is one of the **most critical phases to detect**, as early detection can prevent lateral movement, credential theft, and full compromise.
