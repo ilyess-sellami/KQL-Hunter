@@ -81,6 +81,7 @@ KQL-Hunter/
 │   ├── ta0006-credential-access/
 │   ├── ta0007-discovery/
 │   ├── ta0008-lateral-movement/
+│   ├── ta0009-collection/
 │   ├── ta0010-exfiltration/
 │   └── ta0011-command-and-control/
 ├── docs/
@@ -108,6 +109,7 @@ Each folder under `queries/` represents a MITRE ATT&CK tactic and contains relat
 | Credential Access    | [`ta0006-credential-access/`](/queries/ta0006-credential-access/README.md)    | LSASS, password spraying                |
 | Discovery            | [`ta0007-discovery/`](/queries/ta0007-discovery/README.md)     | Network, account, system discovery             |
 | Lateral Movement     | [`ta0008-lateral-movement/`](/queries/ta0008-lateral-movement/README.md)     | SMB, RDP, remote execution              |
+| Collection            | [`ta0009-collection/`](/queries/ta0009-collection/README.md)       | Screen capture, clipboard, data staging |
 | Exfiltration         | [`ta0010-exfiltration/`](/queries/ta0010-exfiltration/README.md)         | Data transfer anomalies                 |
 | Command and Control  | [`ta0011-command-and-control/`](/queries/ta0011-command-and-control/README.md)  | Beaconing, suspicious outbound traffic  |
 

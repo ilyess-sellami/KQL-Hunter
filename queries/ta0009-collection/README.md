@@ -1,0 +1,44 @@
+# TA0009 – Collection
+
+## Overview
+
+**Collection** represents techniques adversaries use to **gather data of interest** from compromised systems and environments. After lateral movement, attackers search for sensitive files, emails, databases, and other valuable information before exfiltration.
+
+In **KQL Hunter**, Collection hunting focuses on detecting **abnormal file access, large‑scale data reads, mailbox access, clipboard activity, and data aggregation behavior** across endpoint, email, and cloud telemetry.
+
+---
+
+## Why Collection Matters
+
+- Indicates attacker is **preparing for exfiltration**
+- Often targets **high‑value data**
+- Collection activity can be **slow and stealthy**
+- Detecting it limits data loss impact
+
+---
+
+## Primary Collection Techniques (MITRE ATT&CK)
+
+Common techniques covered in this section include:
+
+- **T1005 – Data from Local System**
+- **T1039 – Data from Network Shared Drive**
+- **T1114 – Email Collection**
+- **T1056 – Input Capture**
+- **T1213 – Data from Information Repositories**
+
+Each query is **mapped directly to a MITRE Collection technique**.
+
+---
+
+## Top Data Sources for Collection Hunting
+
+Collection detection relies on monitoring data access patterns:
+
+| Priority | Data Source                     | Table Name            | Use Case              |
+| -------- | ------------------------------- | --------------------- | --------------------- |
+| ⭐ 1      | Defender for Endpoint – File    | `DeviceFileEvents`    | Sensitive file access |
+| ⭐ 2      | Defender for Endpoint – Process | `DeviceProcessEvents` | Data harvesting tools |
+| ⭐ 3      | Defender for Office 365         | `EmailEvents`         | Mailbox access        |
+| ⭐ 4      | Cloud Application Logs          | `CloudAppEvents`      | Cloud data access     |
+| ⭐ 5      | Windows Security Logs           | `SecurityEvent`       | File share access     |
