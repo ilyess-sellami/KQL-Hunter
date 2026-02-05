@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Initial Access** represents the techniques adversaries use to gain their **first foothold** into an environment. This is one of the **most critical phases to detect**, as successful Initial Access often leads to privilege escalation, lateral movement, and full domain compromise.
+**[Initial Access](https://attack.mitre.org/tactics/TA0001/)** represents the techniques adversaries use to gain their **first foothold** into an environment. This is one of the **most critical phases to detect**, as successful Initial Access often leads to privilege escalation, lateral movement, and full domain compromise.
 
 In KQL Hunter, Initial Access hunting focuses on detecting **credential abuse, phishing-driven access, exposed services, and abnormal external authentication patterns** using identity, endpoint, and network telemetry from Microsoft Sentinel.
 

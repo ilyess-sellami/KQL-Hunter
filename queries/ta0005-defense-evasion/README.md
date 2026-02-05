@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Defense Evasion** represents techniques adversaries use to **avoid detection, bypass security controls, and hide malicious activity**. Once attackers gain execution or elevated privileges, evasion techniques are often used to remain undetected while continuing operations.
+**[Defense Evasion](https://attack.mitre.org/tactics/TA0005/)** represents techniques adversaries use to **avoid detection, bypass security controls, and hide malicious activity**. Once attackers gain execution or elevated privileges, evasion techniques are often used to remain undetected while continuing operations.
 
 In **KQL Hunter**, Defense Evasion hunting focuses on identifying **security control tampering, log clearing, obfuscation, masquerading, and abuse of trusted system utilities** across endpoint, identity, and network telemetry.
 

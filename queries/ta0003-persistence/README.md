@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Persistence** represents the techniques adversaries use to **maintain long-term access** to systems across reboots, logoffs, or credential changes. Once persistence is established, attackers can return at will and continue their operations stealthily.
+**[Persistence](https://attack.mitre.org/tactics/TA0003/)** represents the techniques adversaries use to **maintain long-term access** to systems across reboots, logoffs, or credential changes. Once persistence is established, attackers can return at will and continue their operations stealthily.
 
 In **KQL Hunter**, Persistence hunting focuses on detecting **abnormal startup mechanisms, registry modifications, scheduled tasks, service creation, and cloud configuration changes** that indicate an attacker is embedding themselves in the environment.
 

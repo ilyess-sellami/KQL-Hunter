@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Lateral Movement** represents techniques adversaries use to **move through an environment** by leveraging credentials, remote services, and trust relationships. After discovery and credential access, attackers attempt to access additional systems to expand control.
+**[Lateral Movement](https://attack.mitre.org/tactics/TA0008/)** represents techniques adversaries use to **move through an environment** by leveraging credentials, remote services, and trust relationships. After discovery and credential access, attackers attempt to access additional systems to expand control.
 
 In **KQL Hunter**, Lateral Movement hunting focuses on detecting **abnormal remote authentications, suspicious SMB/RDP activity, pass‑the‑hash/ticket behavior, and cloud‑to‑cloud movement** across identity, endpoint, and network telemetry.
 

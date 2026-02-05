@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Exfiltration** represents techniques adversaries use to **steal data out of the environment**. After collecting sensitive information, attackers transfer it to external systems using network channels, cloud services, or covert methods.
+**[Exfiltration](https://attack.mitre.org/tactics/TA0010/)** represents techniques adversaries use to **steal data out of the environment**. After collecting sensitive information, attackers transfer it to external systems using network channels, cloud services, or covert methods.
 
 In **KQL Hunter**, Exfiltration hunting focuses on detecting **abnormal outbound data transfers, suspicious cloud uploads, DNS tunneling, and misuse of trusted services** across network, endpoint, and cloud telemetry.
 

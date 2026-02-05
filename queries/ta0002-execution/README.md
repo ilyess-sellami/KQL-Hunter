@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Execution** represents the techniques adversaries use to **run malicious code** on a target system. After gaining access, attackers must execute commands, scripts, or binaries to continue their operations.
+**[Execution](https://attack.mitre.org/tactics/TA0002/)** represents the techniques adversaries use to **run malicious code** on a target system. After gaining access, attackers must execute commands, scripts, or binaries to continue their operations.
 
 In **KQL Hunter**, Execution hunting focuses on identifying **suspicious process creation, script execution, abuse of legitimate tools (LOLBins), and abnormal command-line behavior** using endpoint and system telemetry.
 

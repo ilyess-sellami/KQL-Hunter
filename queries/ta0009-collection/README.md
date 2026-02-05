@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Collection** represents techniques adversaries use to **gather data of interest** from compromised systems and environments. After lateral movement, attackers search for sensitive files, emails, databases, and other valuable information before exfiltration.
+**[Collection](https://attack.mitre.org/tactics/TA0009/)** represents techniques adversaries use to **gather data of interest** from compromised systems and environments. After lateral movement, attackers search for sensitive files, emails, databases, and other valuable information before exfiltration.
 
 In **KQL Hunter**, Collection hunting focuses on detecting **abnormal file access, large‑scale data reads, mailbox access, clipboard activity, and data aggregation behavior** across endpoint, email, and cloud telemetry.
 

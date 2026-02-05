@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Privilege Escalation** represents techniques adversaries use to **gain higher-level permissions** within a system or environment. After initial access or execution, attackers attempt to elevate privileges to gain administrative or system-level control.
+**[Privilege Escalation](https://attack.mitre.org/tactics/TA0004/)** represents techniques adversaries use to **gain higher-level permissions** within a system or environment. After initial access or execution, attackers attempt to elevate privileges to gain administrative or system-level control.
 
 In KQL Hunter, Privilege Escalation hunting focuses on detecting **abnormal privilege assignments, exploitation attempts, token abuse, UAC bypasses, and suspicious administrative actions** across endpoints and identity platforms.
 

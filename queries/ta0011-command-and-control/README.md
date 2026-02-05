@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Command and Control (C2)** represents techniques adversaries use to **communicate with compromised systems** to issue commands, receive data, and maintain control. Once established, C2 enables attackers to pivot, exfiltrate data, and deploy additional payloads.
+**[Command and Control (C2)](https://attack.mitre.org/tactics/TA0011/)** represents techniques adversaries use to **communicate with compromised systems** to issue commands, receive data, and maintain control. Once established, C2 enables attackers to pivot, exfiltrate data, and deploy additional payloads.
 
 In **KQL Hunter**, Command and Control hunting focuses on detecting **beaconing behavior, suspicious outbound connections, malicious domains, protocol abuse, and living-off-the-land binaries used for C2 traffic** across endpoint, network, and DNS telemetry.
 

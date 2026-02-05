@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Discovery** represents techniques adversaries use to **gain knowledge about the environment** after gaining access. This includes identifying users, systems, network topology, security controls, and trust relationships.
+**[Discovery](https://attack.mitre.org/tactics/TA0007/)** represents techniques adversaries use to **gain knowledge about the environment** after gaining access. This includes identifying users, systems, network topology, security controls, and trust relationships.
 
 In **KQL Hunter**, Discovery hunting focuses on detecting **unusual enumeration commands, system and network reconnaissance, directory queries, and cloud environment discovery activity** using endpoint, identity, and network telemetry.
 

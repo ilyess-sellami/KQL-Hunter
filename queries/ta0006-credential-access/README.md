@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Credential Access** represents techniques adversaries use to **steal, dump, or abuse credentials** such as passwords, hashes, tokens, and authentication material. Successful credential access enables lateral movement, privilege escalation, and long‑term compromise.
+**[Credential Access](https://attack.mitre.org/tactics/TA0006/)** represents techniques adversaries use to **steal, dump, or abuse credentials** such as passwords, hashes, tokens, and authentication material. Successful credential access enables lateral movement, privilege escalation, and long‑term compromise.
 
 In KQL Hunter, Credential Access hunting focuses on detecting **credential dumping, LSASS access, suspicious authentication behavior, token abuse, and access to sensitive credential stores** across endpoints and identity telemetry.
 
