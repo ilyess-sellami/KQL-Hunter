@@ -23,8 +23,8 @@ Privilege escalation detection relies on identity changes, process behavior, and
 
 | Priority | Data Source                        | Table Name              | Use Case                     |
 | -------- | ---------------------------------- | ----------------------- | ---------------------------- |
-| ⭐ 1      | Windows Security Logs              | `SecurityEvent`         | Admin logons, token usage    |
-| ⭐ 2      | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Exploit & injection activity |
-| ⭐ 3      | Azure AD Audit Logs                | `AuditLogs`             | Role assignments             |
-| ⭐ 4      | Defender for Endpoint – Registry   | `DeviceRegistryEvents`  | UAC bypass                   |
-| ⭐ 5      | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | Injection indicators         |
+|   01     | Windows Security Logs              | `SecurityEvent`         | Admin logons, token usage    |
+|   02     | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Exploit & injection activity |
+|   03     | Azure AD Audit Logs                | `AuditLogs`             | Role assignments             |
+|   04     | Defender for Endpoint – Registry   | `DeviceRegistryEvents`  | UAC bypass                   |
+|   05     | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | Injection indicators         |

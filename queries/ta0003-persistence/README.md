@@ -23,8 +23,8 @@ Persistence detection relies on changes over time rather than single events. The
 
 | Priority | Data Source                      | Table Name             | Use Case                  |
 | -------- | -------------------------------- | ---------------------- | ------------------------- |
-| ⭐ 1      | Defender for Endpoint – Registry | `DeviceRegistryEvents` | Run keys, autoruns        |
-| ⭐ 2      | Windows Security Logs            | `SecurityEvent`        | Scheduled tasks, services |
-| ⭐ 3      | Azure AD Audit Logs              | `AuditLogs`            | Account & role changes    |
-| ⭐ 4      | Defender for Endpoint – Process  | `DeviceProcessEvents`  | Persistence execution     |
-| ⭐ 5      | Defender for Endpoint – File     | `DeviceFileEvents`     | Startup files             |
+|   01     | Defender for Endpoint – Registry | `DeviceRegistryEvents` | Run keys, autoruns        |
+|   02     | Windows Security Logs            | `SecurityEvent`        | Scheduled tasks, services |
+|   03     | Azure AD Audit Logs              | `AuditLogs`            | Account & role changes    |
+|   04     | Defender for Endpoint – Process  | `DeviceProcessEvents`  | Persistence execution     |
+|   05     | Defender for Endpoint – File     | `DeviceFileEvents`     | Startup files             |

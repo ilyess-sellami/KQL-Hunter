@@ -23,8 +23,8 @@ The following data sources provide the highest signal for detecting Initial Acce
 
 | Priority | Data Source                         | Table Name            | Primary Use Case                          |
 | -------- | ----------------------------------- | --------------------- | ----------------------------------------- |
-| ⭐ 1      | **Windows Security Logs**           | `SecurityEvent`       | Password spraying, brute force, RDP abuse |
-| ⭐ 2      | **Azure AD Sign-in Logs**           | `SigninLogs`          | Cloud identity abuse, MFA anomalies       |
-| ⭐ 3      | **Network / Firewall Logs**         | `CommonSecurityLog`   | External access to exposed services       |
-| ⭐ 4      | **Defender for Endpoint (Process)** | `DeviceProcessEvents` | Malicious execution after access          |
-| ⭐ 5      | **Defender for Endpoint (Network)** | `DeviceNetworkEvents` | Suspicious inbound/outbound connections   |
+|   01     | **Windows Security Logs**           | `SecurityEvent`       | Password spraying, brute force, RDP abuse |
+|   02     | **Azure AD Sign-in Logs**           | `SigninLogs`          | Cloud identity abuse, MFA anomalies       |
+|   03     | **Network / Firewall Logs**         | `CommonSecurityLog`   | External access to exposed services       |
+|   04     | **Defender for Endpoint (Process)** | `DeviceProcessEvents` | Malicious execution after access          |
+|   05     | **Defender for Endpoint (Network)** | `DeviceNetworkEvents` | Suspicious inbound/outbound connections   |

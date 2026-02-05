@@ -23,8 +23,8 @@ Execution detection relies heavily on **endpoint telemetry**. The following data
 
 | Priority | Data Source                        | Table Name              | Use Case                               |
 | -------- | ---------------------------------- | ----------------------- | -------------------------------------- |
-| ⭐ 1      | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Process creation & command lines       |
-| ⭐ 2      | Windows Security Logs              | `SecurityEvent`         | Process creation (4688)                |
-| ⭐ 3      | Defender for Endpoint – File       | `DeviceFileEvents`      | Script & binary execution              |
-| ⭐ 4      | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | DLL & sideloading                      |
-| ⭐ 5      | Defender for Endpoint – Network    | `DeviceNetworkEvents`   | Execution followed by network activity |
+|   01     | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Process creation & command lines       |
+|   02     | Windows Security Logs              | `SecurityEvent`         | Process creation (4688)                |
+|   03     | Defender for Endpoint – File       | `DeviceFileEvents`      | Script & binary execution              |
+|   04     | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | DLL & sideloading                      |
+|   05     | Defender for Endpoint – Network    | `DeviceNetworkEvents`   | Execution followed by network activity |
