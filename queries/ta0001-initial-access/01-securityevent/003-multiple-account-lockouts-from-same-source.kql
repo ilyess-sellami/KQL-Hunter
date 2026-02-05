@@ -1,0 +1,16 @@
+// Title: Multiple Account Lockouts from Single Source
+// Description: Detects a source triggering account lockouts across multiple users
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1110 - Brute Force
+// Severity: High
+
+SecurityEvent
+| where EventID == 4740
+| summarize
+    LockedAccounts = dcount(TargetUserName),
+    Users          = make_set(TargetUserName, 50)
+    by IPAddress, bin(TimeGenerated, 15m)
+| where LockedAccounts >= 3
+| order by LockedAccounts desc
