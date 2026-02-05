@@ -24,8 +24,8 @@ Discovery detection relies on spotting enumeration behavior patterns:
 
 | Priority   | Data Source                     | Table Name            | Use Case                 |
 |------------| ------------------------------- | --------------------- | ------------------------ |
-| ⭐ 1      | Defender for Endpoint – Process | `DeviceProcessEvents` | Enumeration commands     |
-| ⭐ 2      | Defender for Endpoint – Network | `DeviceNetworkEvents` | Network scanning         |
-| ⭐ 3      | Windows Security Logs           | `SecurityEvent`       | Account & system queries |
-| ⭐ 4      | Azure AD Sign-in Logs           | `SigninLogs`          | Cloud discovery          |
-| ⭐ 5      | Azure AD Audit Logs             | `AuditLogs`           | Directory enumeration    |
+|    01      | Defender for Endpoint – Process | `DeviceProcessEvents` | Enumeration commands     |
+|    02      | Defender for Endpoint – Network | `DeviceNetworkEvents` | Network scanning         |
+|    03      | Windows Security Logs           | `SecurityEvent`       | Account & system queries |
+|    04      | Azure AD Sign-in Logs           | `SigninLogs`          | Cloud discovery          |
+|    05      | Azure AD Audit Logs             | `AuditLogs`           | Directory enumeration    |

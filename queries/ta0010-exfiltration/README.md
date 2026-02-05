@@ -23,8 +23,8 @@ Exfiltration detection relies heavily on outbound network visibility:
 
 | Priority | Data Source                     | Table Name            | Use Case                    |
 | -------- | ------------------------------- | --------------------- | --------------------------- |
-| ⭐ 1      | Defender for Endpoint – Network | `DeviceNetworkEvents` | Suspicious outbound traffic |
-| ⭐ 2      | Network / Firewall Logs         | `CommonSecurityLog`   | Large data transfers        |
-| ⭐ 3      | Cloud Application Logs          | `CloudAppEvents`      | Cloud uploads               |
-| ⭐ 4      | DNS Telemetry                   | `DnsEvents`           | DNS tunneling               |
-| ⭐ 5      | Defender for Endpoint – Process | `DeviceProcessEvents` | Exfiltration tools          |
+|  01      | Defender for Endpoint – Network | `DeviceNetworkEvents` | Suspicious outbound traffic |
+|  02      | Network / Firewall Logs         | `CommonSecurityLog`   | Large data transfers        |
+|  03      | Cloud Application Logs          | `CloudAppEvents`      | Cloud uploads               |
+|  04      | DNS Telemetry                   | `DnsEvents`           | DNS tunneling               |
+|  05      | Defender for Endpoint – Process | `DeviceProcessEvents` | Exfiltration tools          |

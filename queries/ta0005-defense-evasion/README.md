@@ -23,8 +23,8 @@ Defense evasion detection relies on spotting changes that weaken security postur
 
 | Priority | Data Source                        | Table Name              | Use Case                    |
 | -------- | ---------------------------------- | ----------------------- | --------------------------- |
-| ⭐ 1      | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Security tool tampering     |
-| ⭐ 2      | Windows Security Logs              | `SecurityEvent`         | Log clearing, audit disable |
-| ⭐ 3      | Defender for Endpoint – Registry   | `DeviceRegistryEvents`  | AV / Defender changes       |
-| ⭐ 4      | Defender for Endpoint – File       | `DeviceFileEvents`      | Hidden / renamed files      |
-| ⭐ 5      | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | LOLBin abuse                |
+|   01     | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Security tool tampering     |
+|   02     | Windows Security Logs              | `SecurityEvent`         | Log clearing, audit disable |
+|   03     | Defender for Endpoint – Registry   | `DeviceRegistryEvents`  | AV / Defender changes       |
+|   04     | Defender for Endpoint – File       | `DeviceFileEvents`      | Hidden / renamed files      |
+|   05     | Defender for Endpoint – Image Load | `DeviceImageLoadEvents` | LOLBin abuse                |
