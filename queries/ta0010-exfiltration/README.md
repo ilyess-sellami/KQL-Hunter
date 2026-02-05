@@ -17,20 +17,6 @@ In **KQL Hunter**, Exfiltration hunting focuses on detecting **abnormal outbound
 
 ---
 
-## Primary Exfiltration Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1041 – Exfiltration Over C2 Channel**
-- **T1567 – Exfiltration Over Web Services**
-- **T1048 – Exfiltration Over Alternative Protocol**
-- **T1020 – Automated Exfiltration**
-- **T1071 – Application Layer Protocol (Exfil)**
-
-Each query is **mapped directly to a MITRE Exfiltration technique**.
-
----
-
 ## Top Data Sources for Exfiltration Hunting
 
 Exfiltration detection relies heavily on outbound network visibility:

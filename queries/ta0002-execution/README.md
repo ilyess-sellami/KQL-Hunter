@@ -17,20 +17,6 @@ In **KQL Hunter**, Execution hunting focuses on identifying **suspicious process
 
 ---
 
-## Primary Execution Techniques (MITRE ATT&CK)
-
-Common execution techniques covered in this section include:
-
-- **T1059 – Command and Scripting Interpreter**
-- **T1204 – User Execution**
-- **T1106 – Native API**
-- **T1569 – System Services**
-- **T1127 – Trusted Developer Utilities Proxy Execution**
-
-Each query is **mapped directly to a MITRE Execution technique**.
-
----
-
 ## Top Data Sources for Execution Hunting
 
 Execution detection relies heavily on **endpoint telemetry**. The following data sources provide the strongest signals:

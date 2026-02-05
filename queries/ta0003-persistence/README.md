@@ -17,20 +17,6 @@ In **KQL Hunter**, Persistence hunting focuses on detecting **abnormal startup m
 
 ---
 
-## Primary Persistence Techniques (MITRE ATT&CK)
-
-Common persistence techniques covered in this section include:
-
-- **T1547 – Boot or Logon Autostart Execution**
-- **T1053 – Scheduled Task / Job**
-- **T1543 – Create or Modify System Process**
-- **T1098 – Account Manipulation**
-- **T1136 – Create Account**
-
-Each hunting query is **mapped directly to a MITRE Persistence technique**.
-
----
-
 ## Top Data Sources for Persistence Hunting
 
 Persistence detection relies on changes over time rather than single events. These data sources provide the strongest signals:

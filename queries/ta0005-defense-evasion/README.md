@@ -17,20 +17,6 @@ In **KQL Hunter**, Defense Evasion hunting focuses on identifying **security con
 
 ---
 
-## Primary Defense Evasion Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1562 – Impair Defenses**
-- **T1070 – Indicator Removal on Host**
-- **T1027 – Obfuscated or Encrypted Files/Information**
-- **T1036 – Masquerading**
-- **T1218 – Signed Binary Proxy Execution (LOLBins)**
-
-Each query is **mapped directly to a MITRE Defense Evasion technique**.
-
----
-
 ## Top Data Sources for Defense Evasion Hunting
 
 Defense evasion detection relies on spotting changes that weaken security posture:

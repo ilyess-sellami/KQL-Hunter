@@ -17,20 +17,6 @@ In **KQL Hunter**, Collection hunting focuses on detecting **abnormal file acces
 
 ---
 
-## Primary Collection Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1005 – Data from Local System**
-- **T1039 – Data from Network Shared Drive**
-- **T1114 – Email Collection**
-- **T1056 – Input Capture**
-- **T1213 – Data from Information Repositories**
-
-Each query is **mapped directly to a MITRE Collection technique**.
-
----
-
 ## Top Data Sources for Collection Hunting
 
 Collection detection relies on monitoring data access patterns:

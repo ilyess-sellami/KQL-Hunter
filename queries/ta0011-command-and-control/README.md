@@ -17,20 +17,6 @@ In **KQL Hunter**, Command and Control hunting focuses on detecting **beaconing 
 
 ---
 
-## Primary Command and Control Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1071 – Application Layer Protocol**
-- **T1095 – Non-Application Layer Protocol**
-- **T1105 – Ingress Tool Transfer**
-- **T1573 – Encrypted Channel**
-- **T1568 – Dynamic Resolution**
-
-Each query is **mapped directly to a MITRE C2 technique**.
-
----
-
 ## Top Data Sources for Command and Control Hunting
 
 C2 detection relies on network behavior and communication patterns:

@@ -18,18 +18,6 @@ In **KQL Hunter**, Discovery hunting focuses on detecting **unusual enumeration 
 
 ---
 
-## Common techniques covered in this section include:
-
-- **T1087 – Account Discovery**
-- **T1018 – Remote System Discovery**
-- **T1046 – Network Service Discovery**
-- **T1057 – Process Discovery**
-- **T1518 – Software Discovery**
-
-Each query is **mapped directly to a MITRE Discovery technique**.
-
----
-
 ## Top Data Sources for Discovery Hunting
 
 Discovery detection relies on spotting enumeration behavior patterns:

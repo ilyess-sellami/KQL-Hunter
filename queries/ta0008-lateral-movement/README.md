@@ -17,20 +17,6 @@ In **KQL Hunter**, Lateral Movement hunting focuses on detecting **abnormal remo
 
 ---
 
-## Primary Lateral Movement Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1021 – Remote Services**
-- **T1550 – Use of Alternate Authentication Material**
-- **T1075 – Pass the Hash**
-- **T1076 – Remote Desktop Protocol**
-- **T1210 – Exploitation of Remote Services**
-
-Each query is mapped directly to a MITRE Lateral Movement technique.
-
----
-
 ## Top Data Sources for Lateral Movement Hunting
 
 Lateral movement detection relies on authentication, network, and endpoint telemetry:

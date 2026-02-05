@@ -17,20 +17,6 @@ In KQL Hunter, Privilege Escalation hunting focuses on detecting **abnormal priv
 
 ---
 
-## Primary Privilege Escalation Techniques (MITRE ATT&CK)
-
-Common techniques covered in this section include:
-
-- **T1068 – Exploitation for Privilege Escalation**
-- **T1548 – Abuse Elevation Control Mechanism**
-- **T1134 – Access Token Manipulation**
-- **T1078 – Valid Accounts (Privilege Abuse)**
-- **T1055 – Process Injection**
-
-Each query is **mapped directly to the appropriate MITRE technique**.
-
----
-
 ## Top Data Sources for Privilege Escalation Hunting
 
 Privilege escalation detection relies on identity changes, process behavior, and security events:
