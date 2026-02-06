@@ -1,0 +1,13 @@
+// Title: Logon Outside Business Hours
+// Description: Detects logons outside typical working hours
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4624
+| extend Hour = datetime_part("hour", TimeGenerated)
+| where Hour < 6 or Hour > 20
+| project TimeGenerated, TargetUserName, IPAddress, LogonType, Computer
