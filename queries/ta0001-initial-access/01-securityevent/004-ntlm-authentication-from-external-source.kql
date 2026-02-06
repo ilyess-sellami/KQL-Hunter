@@ -1,0 +1,15 @@
+// Title: NTLM Authentication from External Source
+// Description: Detects NTLM logons originating from public IP addresses
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624
+| where AuthenticationPackageName == "NTLM"
+| where not(IPAddress startswith "10.") 
+  and not(IPAddress startswith "192.168")
+  and not(IPAddress startswith "172.")
+| project TimeGenerated, TargetUserName, IPAddress, LogonType, Computer
