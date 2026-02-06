@@ -1,0 +1,13 @@
+// Title: Excessive Connection Attempts
+// Description: Detects sources attempting to connect to many ports in a short timeframe
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1190 - Exploit Public-Facing Application
+// Severity: Medium
+
+CommonSecurityLog
+| summarize DestPorts = dcount(DestinationPort)
+    by SourceIP, bin(TimeGenerated, 30m)
+| where DestPorts >= 7
+| order by DestPorts desc

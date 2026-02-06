@@ -1,0 +1,13 @@
+// Title: Rare External Service Access
+// Description: Detects unusual access to rarely used public-facing services
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1190 - Exploit Public-Facing Application
+// Severity: Medium
+
+CommonSecurityLog
+| summarize AccessCount = count() by DestinationPort, SourceIP, bin(TimeGenerated, 1h)
+| summarize Attempts = count(), Sources = make_set(SourceIP, 50) by DestinationPort
+| where Attempts < 5
+| order by Attempts asc
