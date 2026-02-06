@@ -1,0 +1,17 @@
+// Title: Suspicious External RDP Access
+// Description: Detects RDP logins from public IPs into internal systems
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1133 - External Remote Services
+// Severity: High
+
+CommonSecurityLog
+| where DestinationPort == "3389"
+| where not(SourceIP startswith "10.")
+  and not(SourceIP startswith "192.168")
+  and not(SourceIP startswith "172.")
+| summarize AttemptCount = count(), TargetedHosts = make_set(DestinationIP, 50)
+    by SourceIP, bin(TimeGenerated, 15m)
+| where AttemptCount >= 5
+| order by AttemptCount desc
