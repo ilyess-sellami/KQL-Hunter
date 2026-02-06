@@ -1,0 +1,17 @@
+// Title: External SSH Access Attempt
+// Description: Detects SSH connection attempts from unknown external sources
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1133 - External Remote Services
+// Severity: High
+
+CommonSecurityLog
+| where DestinationPort == 22
+| where not(SourceIP startswith "10.")
+  and not(SourceIP startswith "192.168")
+  and not(SourceIP startswith "172.")
+| summarize AttemptCount = count(), TargetHosts = make_set(DestinationIP, 50)
+    by SourceIP, bin(TimeGenerated, 15m)
+| where AttemptCount >= 2
+| order by AttemptCount desc
