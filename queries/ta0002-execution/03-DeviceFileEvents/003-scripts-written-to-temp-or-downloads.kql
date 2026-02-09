@@ -1,0 +1,13 @@
+// Title: Scripts Written to Temp or Downloads
+// Description: Detects script files created in user-writable directories
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1204 - User Execution
+// Severity: Medium
+
+DeviceFileEvents
+| where ActionType == "Created"
+| where FileName endswith ".ps1" or FileName endswith ".bat" or FileName endswith ".cmd" or FileName endswith ".vbs"
+| where FolderPath has_any (@"\Downloads\", @"\AppData\Local\Temp\", @"\AppData\Roaming\")
+| project TimeGenerated, DeviceName, FileName, FolderPath, InitiatingProcessFileName

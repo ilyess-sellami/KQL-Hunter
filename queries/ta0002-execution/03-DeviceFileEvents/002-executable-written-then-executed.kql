@@ -1,0 +1,15 @@
+// Title: Executable Written Then Executed
+// Description: Detects binaries written to disk that are immediately executed
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1105 / T1204 - User Execution
+// Severity: High
+
+let ExecutedFiles = DeviceProcessEvents
+| project FileName, DeviceName, TimeGenerated;
+
+DeviceFileEvents
+| where ActionType == "Created"
+| where FileName endswith ".exe"
+| project TimeGenerated, DeviceName, FileName, FolderPath, InitiatingProcessFileName

@@ -1,0 +1,12 @@
+// Title: Suspicious Script Execution
+// Description: Detects PowerShell, VBScript, Batch, and CMD scripts written to disk
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059 - Command and Scripting Interpreter
+// Severity: High
+
+DeviceFileEvents
+| where ActionType == "Created"
+| where FileName endswith ".ps1" or FileName endswith ".vbs" or FileName endswith ".bat" or FileName endswith ".cmd"
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, FileName, FolderPath
