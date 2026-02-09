@@ -1,0 +1,17 @@
+// Title: Rare Destination Port Connection
+// Description: Detects outbound connections to uncommon destination ports from endpoints,
+//              potentially indicating exploit delivery or malicious staging.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1190 - Exploit Public-Facing Application
+// Severity: Medium
+
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| summarize
+    ConnectionCount = count(),
+    RemoteIPs = make_set(RemoteIP, 20)
+    by DeviceName, RemotePort
+| where ConnectionCount < 5
+| project DeviceName, RemotePort, ConnectionCount, RemoteIPs

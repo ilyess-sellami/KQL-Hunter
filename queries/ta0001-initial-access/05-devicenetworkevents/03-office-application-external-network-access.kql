@@ -1,0 +1,12 @@
+// Title: Office Application External Network Access
+// Description: Detects Microsoft Office applications making outbound connections to the internet
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1566 - Phishing
+// Severity: High
+
+DeviceNetworkEvents
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "outlook.exe")
+| where RemoteIPType == "Public"
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, RemoteIP, RemotePort, RemoteUrl

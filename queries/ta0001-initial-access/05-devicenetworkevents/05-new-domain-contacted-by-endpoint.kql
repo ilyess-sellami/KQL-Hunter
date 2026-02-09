@@ -1,0 +1,14 @@
+// Title: New Domain Contacted by Endpoint
+// Description: Identifies endpoints communicating with domains not commonly seen in the environment
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1189 - Drive-by Compromise
+// Severity: Medium
+
+DeviceNetworkEvents
+| where isnotempty(RemoteUrl)
+| summarize ConnectionCount = count()
+    by DeviceName, RemoteUrl
+| where ConnectionCount <= 3
+| project DeviceName, RemoteUrl

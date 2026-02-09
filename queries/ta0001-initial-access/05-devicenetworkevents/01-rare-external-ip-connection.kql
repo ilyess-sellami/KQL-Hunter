@@ -1,0 +1,14 @@
+// Title: Rare External IP Connection
+// Description: Detects endpoints communicating with rare or first-seen external IP addresses
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1071 - Application Layer Protocol
+// Severity: Medium
+
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| summarize ConnectionCount = count()
+    by DeviceName, RemoteIP
+| where ConnectionCount < 3
+| project DeviceName, RemoteIP, ConnectionCount

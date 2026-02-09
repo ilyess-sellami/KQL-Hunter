@@ -1,0 +1,13 @@
+// Title: Suspicious File Download from Public IP
+// Description: Detects endpoints downloading content from external IPs without a resolved domain
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1105 - Ingress Tool Transfer
+// Severity: High
+
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| where isnotempty(RemoteIP) and isempty(RemoteUrl)
+| where InitiatingProcessFileName in~ ("powershell.exe", "cmd.exe", "bitsadmin.exe", "curl.exe", "wget.exe")
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, RemoteIP, RemotePort
