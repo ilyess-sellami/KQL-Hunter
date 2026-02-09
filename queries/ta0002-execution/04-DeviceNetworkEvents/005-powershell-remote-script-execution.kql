@@ -1,0 +1,14 @@
+// Title: PowerShell Remote Script Execution
+// Description: Detects PowerShell processes downloading and executing remote scripts over HTTP/HTTPS, a common attacker execution pattern.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059.001 - PowerShell
+// Severity: High
+
+DeviceNetworkEvents
+| where RemoteUrl has_any ("http://", "https://")
+| where InitiatingProcessFileName =~ "powershell.exe" or InitiatingProcessFileName =~ "pwsh.exe"
+| extend ExecutedCommandLine = InitiatingProcessCommandLine
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, RemoteUrl, ExecutedCommandLine, ReportId
+| order by TimeGenerated desc

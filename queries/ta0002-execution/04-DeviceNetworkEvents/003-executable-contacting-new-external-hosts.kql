@@ -1,0 +1,12 @@
+// Title: Executable Contacting New External Hosts
+// Description: Detects processes connecting to external IPs for the first time
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059 / T1106 - Execution followed by network
+// Severity: High
+
+DeviceNetworkEvents
+| summarize ConnectionCount = count() by DeviceName, InitiatingProcessFileName, RemoteIP
+| where ConnectionCount == 1
+| project DeviceName, InitiatingProcessFileName, RemoteIP

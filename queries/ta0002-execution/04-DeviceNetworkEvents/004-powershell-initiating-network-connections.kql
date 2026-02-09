@@ -1,0 +1,12 @@
+// Title: PowerShell Initiating Network Connections
+// Description: Detects PowerShell processes making outbound connections
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059.001 - PowerShell
+// Severity: High
+
+DeviceNetworkEvents
+| where InitiatingProcessFileName =~ "powershell.exe"
+| summarize ConnectionCount = count(), RemoteIPs = make_set(RemoteIP, 20) by DeviceName, bin(TimeGenerated, 15m)
+| project TimeGenerated, DeviceName, RemoteIPs, ConnectionCount

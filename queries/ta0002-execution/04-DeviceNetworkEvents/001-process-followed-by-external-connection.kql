@@ -1,0 +1,13 @@
+// Title: Process Followed by External Connection
+// Description: Detects newly started processes that initiate outbound connections to public IPs
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059 / T1106 - Execution followed by network activity
+// Severity: High
+
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| summarize ConnectionCount = count(), RemoteIPs = make_set(RemoteIP, 20) by InitiatingProcessFileName, DeviceName, bin(TimeGenerated, 10m)
+| where ConnectionCount >= 1
+| project TimeGenerated, DeviceName, InitiatingProcessFileName, RemoteIPs, ConnectionCount

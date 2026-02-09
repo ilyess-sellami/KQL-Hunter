@@ -1,0 +1,13 @@
+// Title: Rare Remote Port Connection
+// Description: Detects outbound connections to uncommon destination ports
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1190 - Exploit Public-Facing Application / T1059 - Execution
+// Severity: Medium
+
+DeviceNetworkEvents
+| where RemoteIPType == "Public"
+| summarize ConnectionCount = count(), RemoteIPs = make_set(RemoteIP, 20) by DeviceName, RemotePort
+| where ConnectionCount < 5
+| project DeviceName, RemotePort, RemoteIPs, ConnectionCount
