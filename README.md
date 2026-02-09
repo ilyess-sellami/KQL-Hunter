@@ -127,8 +127,6 @@ Each KQL file follows a **standard structure** to ensure consistency and clarity
 //   Tactic: Execution
 //   Technique: T1059.001 - PowerShell
 // Severity: Medium
-// References:
-// - https://attack.mitre.org/techniques/T1059/001/
 
 DeviceProcessEvents
 | where FileName =~ "powershell.exe"
