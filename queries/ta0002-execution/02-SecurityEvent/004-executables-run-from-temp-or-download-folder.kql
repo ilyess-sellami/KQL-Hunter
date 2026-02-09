@@ -1,0 +1,12 @@
+// Title: Executables Run from Temp or Download Folder
+// Description: Detects binaries launched from user-writable or temporary directories
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1204 - User Execution
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4688
+| where NewProcessName has_any (@"\AppData\Local\Temp\", @"\Downloads\")
+| project TimeGenerated, Computer, Account, NewProcessName, CommandLine, ParentProcessName

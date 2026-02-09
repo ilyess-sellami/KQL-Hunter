@@ -1,0 +1,12 @@
+// Title: Office Applications Spawning Scripts
+// Description: Detects Office apps launching scripting engines or shells (macro or phishing payloads)
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059 - Command and Scripting Interpreter
+// Severity: High
+
+DeviceProcessEvents
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "outlook.exe")
+| where FileName in~ ("powershell.exe", "cmd.exe", "wscript.exe", "cscript.exe")
+| project TimeGenerated, DeviceName, AccountName, InitiatingProcessFileName, FileName, ProcessCommandLine

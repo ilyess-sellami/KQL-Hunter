@@ -1,0 +1,13 @@
+// Title: Suspicious PowerShell Execution
+// Description: Detects PowerShell executions with encoded or obfuscated commands
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059.001 - PowerShell
+// Severity: High
+
+SecurityEvent
+| where EventID == 4688
+| where NewProcessName endswith "powershell.exe"
+| where CommandLine has_any ("-enc", "-encodedcommand", "FromBase64String", "IEX")
+| project TimeGenerated, Computer, Account, NewProcessName, CommandLine, ParentProcessName

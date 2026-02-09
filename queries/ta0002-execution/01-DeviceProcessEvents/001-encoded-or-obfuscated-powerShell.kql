@@ -1,0 +1,12 @@
+// Title: Encoded/Obfuscated PowerShell Execution
+// Description: Detects PowerShell commands using encoded or obfuscated arguments
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059.001 - PowerShell
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any ("-enc", "-encodedcommand", "FromBase64String", "IEX")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine

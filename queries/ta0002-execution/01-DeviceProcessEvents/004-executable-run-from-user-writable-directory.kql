@@ -1,0 +1,16 @@
+// Title: Executable Run from User-Writable Directory
+// Description: Detects execution of binaries from temp or user-controlled locations
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1204 - User Execution
+// Severity: Medium
+
+DeviceProcessEvents
+| where FolderPath has_any (
+    @"\Downloads\",
+    @"\AppData\Local\Temp\",
+    @"\AppData\Roaming\"
+)
+| where FileName endswith ".exe"
+| project TimeGenerated, DeviceName, AccountName, FileName, FolderPath

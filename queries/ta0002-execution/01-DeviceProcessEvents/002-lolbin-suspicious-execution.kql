@@ -1,0 +1,12 @@
+// Title: LOLBin Suspicious Execution
+// Description: Detects suspicious use of trusted Windows binaries to execute commands
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1218 - Signed Binary Proxy Execution
+// Severity: High
+
+DeviceProcessEvents
+| where FileName in~ ("rundll32.exe", "mshta.exe", "regsvr32.exe", "wmic.exe")
+| where ProcessCommandLine !has @"C:\Windows\System32"
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine

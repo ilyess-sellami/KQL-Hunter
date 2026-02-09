@@ -1,0 +1,14 @@
+// Title: Rare or First-Time Process Execution
+// Description: Identifies processes executed rarely or for the first time on a host
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1204 - User Execution
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4688
+| summarize ExecutionCount = count()
+    by Computer, NewProcessName
+| where ExecutionCount == 1
+| project Computer, NewProcessName

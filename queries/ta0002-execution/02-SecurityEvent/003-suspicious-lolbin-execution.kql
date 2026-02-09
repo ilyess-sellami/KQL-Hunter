@@ -1,0 +1,15 @@
+// Title: Suspicious LOLBin Execution
+// Description: Detects execution of common Windows binaries used for proxy execution
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1218 - Signed Binary Proxy Execution
+// Severity: High
+
+SecurityEvent
+| where EventID == 4688
+| where NewProcessName in~ ("C:\\Windows\\System32\\rundll32.exe",
+                            "C:\\Windows\\System32\\mshta.exe",
+                            "C:\\Windows\\System32\\regsvr32.exe",
+                            "C:\\Windows\\System32\\wmic.exe")
+| project TimeGenerated, Computer, Account, NewProcessName, CommandLine, 

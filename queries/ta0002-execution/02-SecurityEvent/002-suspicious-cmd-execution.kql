@@ -1,0 +1,13 @@
+// Title: Suspicious CMD Execution
+// Description: Detects abnormal command prompt executions that may indicate malicious activity
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0002 - Execution
+//   Technique: T1059.003 - Windows Command Shell
+// Severity: High
+
+SecurityEvent
+| where EventID == 4688
+| where NewProcessName endswith "cmd.exe"
+| where CommandLine has_any ("/c", "/k")
+| project TimeGenerated, Computer, Account, NewProcessName, CommandLine, ParentProcessName
