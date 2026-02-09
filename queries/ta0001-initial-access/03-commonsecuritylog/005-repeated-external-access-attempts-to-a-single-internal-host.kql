@@ -1,0 +1,23 @@
+// Title: Repeated External Access Attempts to a Single Internal Host
+// Description: Detects an external IP repeatedly attempting connections
+//              to the same internal destination, indicating brute-force
+//              or exploit attempts against exposed services.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1133 - External Remote Services
+// Severity: Medium
+// References:
+// - https://attack.mitre.org/techniques/T1133/
+
+CommonSecurityLog
+| where isnotempty(SourceIP) and isnotempty(DestinationIP)
+| where not(SourceIP startswith "10.")
+  and not(SourceIP startswith "192.168")
+  and not(SourceIP startswith "172.")
+| summarize
+    AttemptCount = count(),
+    TargetPorts  = make_set(DestinationPort, 20)
+    by SourceIP, DestinationIP, bin(TimeGenerated, 10m)
+| where AttemptCount >= 15
+| order by AttemptCount desc
