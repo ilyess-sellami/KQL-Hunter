@@ -1,0 +1,13 @@
+// Title: Office Application Executing Payload
+// Description: Detects Microsoft Office applications spawning executable payloads, commonly seen in phishing attacks
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1566 - Phishing
+// Severity: High
+
+DeviceProcessEvents
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "outlook.exe")
+| where FileName endswith ".exe"
+| project TimeGenerated, DeviceName, AccountName,
+          InitiatingProcessFileName, FileName, ProcessCommandLine

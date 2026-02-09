@@ -1,0 +1,17 @@
+// Title: Execution from Download or Attachment Path
+// Description: Detects execution of binaries from common user-controlled download or attachment locations
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1204 - User Execution
+// Severity: Medium
+
+
+DeviceProcessEvents
+| where FolderPath has_any (
+    @"\Downloads\",
+    @"\AppData\Local\Temp\",
+    @"\AppData\Local\Microsoft\Windows\INetCache\"
+)
+| where FileName endswith ".exe"
+| project TimeGenerated, DeviceName, AccountName, FileName, FolderPath

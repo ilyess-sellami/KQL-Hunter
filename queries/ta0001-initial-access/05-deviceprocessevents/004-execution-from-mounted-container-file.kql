@@ -1,0 +1,13 @@
+// Title: Execution from Mounted Container File
+// Description: Detects execution of binaries from ISO, IMG, or HTML container-based phishing payloads
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1566.001 - Phishing Attachment
+// Severity: High
+
+
+DeviceProcessEvents
+| where FolderPath has_any (".iso", ".img", ".html")
+| where FileName endswith ".exe"
+| project TimeGenerated, DeviceName, AccountName, FileName, FolderPath

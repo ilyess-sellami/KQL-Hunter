@@ -1,7 +1,10 @@
 // Title: Browser Spawning Script Interpreter
+// Description: Detects browsers launching script interpreters, often linked to drive-by downloads or malicious web content
+// Data Source: DeviceProcessEvents
 // MITRE ATT&CK:
 //   Tactic: TA0001 - Initial Access
 //   Technique: T1189 - Drive-by Compromise
+// Severity: High
 
 DeviceProcessEvents
 | where InitiatingProcessFileName in~ ("chrome.exe", "msedge.exe", "firefox.exe")

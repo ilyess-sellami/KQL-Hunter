@@ -1,0 +1,14 @@
+// Title: First-Seen Process Execution by User
+// Description: Identifies rare or first-time process executions per user, potentially indicating compromised credentials or targeted delivery
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+
+
+DeviceProcessEvents
+| summarize ExecutionCount = count()
+    by AccountName, FileName
+| where ExecutionCount == 1
+| project AccountName, FileName
