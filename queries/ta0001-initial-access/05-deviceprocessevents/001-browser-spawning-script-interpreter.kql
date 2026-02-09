@@ -1,0 +1,10 @@
+// Title: Browser Spawning Script Interpreter
+// MITRE ATT&CK:
+//   Tactic: TA0001 - Initial Access
+//   Technique: T1189 - Drive-by Compromise
+
+DeviceProcessEvents
+| where InitiatingProcessFileName in~ ("chrome.exe", "msedge.exe", "firefox.exe")
+| where FileName in~ ("powershell.exe", "cmd.exe", "mshta.exe", "wscript.exe")
+| project TimeGenerated, DeviceName, AccountName,
+          InitiatingProcessFileName, FileName, ProcessCommandLine
