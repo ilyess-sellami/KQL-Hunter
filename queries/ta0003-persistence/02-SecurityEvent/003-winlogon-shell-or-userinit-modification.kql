@@ -1,0 +1,15 @@
+// Title: Winlogon Shell or Userinit Modification
+// Description: Detects modification of Winlogon registry values that can enable persistence at user logon.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1547.004 - Winlogon Helper DLL
+// Severity: High
+
+SecurityEvent
+| where EventID == 4657
+| where ObjectName has @"\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+| where ObjectValueName in ("Shell", "Userinit")
+| project TimeGenerated, Computer, SubjectUserName,
+          ProcessName, ObjectName, NewValue
+| order by TimeGenerated desc

@@ -1,0 +1,13 @@
+// Title: Suspicious Service Installation
+// Description: Detects installation of new services which may indicate persistence via malicious Windows service.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1543.003 - Create or Modify System Process: Windows Service
+// Severity: High
+
+SecurityEvent
+| where EventID in (4697, 7045)
+| project TimeGenerated, Computer, SubjectUserName,
+          ServiceName, ServiceFileName, EventID
+| order by TimeGenerated desc

@@ -1,0 +1,11 @@
+// Title: Scheduled Task Creation
+// Description: Detects creation of scheduled tasks which can be used for persistence.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1053.005 - Scheduled Task
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4698
+| order by TimeGenerated desc

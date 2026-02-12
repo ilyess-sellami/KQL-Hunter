@@ -1,0 +1,17 @@
+// Title: Registry Run Key Persistence via Security Logs
+// Description: Detects modification of Run and RunOnce registry keys commonly abused for persistence.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1547.001 - Registry Run Keys / Startup Folder
+// Severity: High
+
+SecurityEvent
+| where EventID == 4657  // Registry value modified
+| where ObjectName has_any (
+    @"\Software\Microsoft\Windows\CurrentVersion\Run",
+    @"\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+)
+| project TimeGenerated, Computer, SubjectUserName,
+          ProcessName, ObjectName, NewValue, EventID
+| order by TimeGenerated desc
