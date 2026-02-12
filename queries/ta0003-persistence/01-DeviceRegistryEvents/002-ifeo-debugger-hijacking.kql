@@ -1,0 +1,16 @@
+// Title: IFEO Debugger Hijacking
+// Description: Detects modification of Image File Execution Options registry keys that can redirect legitimate executables to malicious payloads.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1546.012 - Image File Execution Options Injection
+// Severity: High
+
+DeviceRegistryEvents
+| where ActionType == "RegistryValueSet"
+| where RegistryKey has @"\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\"
+| where RegistryValueName =~ "Debugger"
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          InitiatingProcessCommandLine, RegistryKey,
+          RegistryValueData, ReportId
+| order by TimeGenerated desc

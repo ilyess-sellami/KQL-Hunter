@@ -1,0 +1,16 @@
+// Title: Winlogon Shell or Userinit Modification
+// Description: Detects modification of Winlogon registry values that can launch malicious programs at user logon.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1547.004 - Winlogon Helper DLL
+// Severity: High
+
+DeviceRegistryEvents
+| where ActionType == "RegistryValueSet"
+| where RegistryKey has @"\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+| where RegistryValueName in ("Shell", "Userinit")
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          InitiatingProcessCommandLine, RegistryKey,
+          RegistryValueName, RegistryValueData, ReportId
+| order by TimeGenerated desc

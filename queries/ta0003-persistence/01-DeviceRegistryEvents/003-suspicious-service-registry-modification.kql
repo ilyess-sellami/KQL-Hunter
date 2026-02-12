@@ -1,0 +1,16 @@
+// Title: Suspicious Service Registry Modification
+// Description: Detects modifications to Windows service registry keys that may indicate persistence via malicious services.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1543.003 - Create or Modify System Process: Windows Service
+// Severity: High
+
+DeviceRegistryEvents
+| where ActionType in ("RegistryKeyCreated", "RegistryValueSet")
+| where RegistryKey has @"\SYSTEM\CurrentControlSet\Services\"
+| where RegistryValueName in ("ImagePath", "Start")
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          InitiatingProcessCommandLine, RegistryKey,
+          RegistryValueName, RegistryValueData, ReportId
+| order by TimeGenerated desc

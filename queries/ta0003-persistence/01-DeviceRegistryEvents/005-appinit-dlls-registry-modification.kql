@@ -1,0 +1,17 @@
+// Title: AppInit DLLs Registry Modification
+// Description: Detects changes to AppInit_DLLs registry value, which can force DLL loading into user-mode processes for persistence.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1546.010 - AppInit DLLs
+// Severity: Medium
+
+DeviceRegistryEvents
+| where ActionType == "RegistryValueSet"
+| where RegistryKey has @"\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows"
+| where RegistryValueName =~ "AppInit_DLLs"
+| where isnotempty(RegistryValueData)
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          InitiatingProcessCommandLine, RegistryKey,
+          RegistryValueData, ReportId
+| order by TimeGenerated desc
