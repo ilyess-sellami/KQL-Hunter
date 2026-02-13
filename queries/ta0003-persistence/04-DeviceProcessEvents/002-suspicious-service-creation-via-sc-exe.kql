@@ -1,0 +1,14 @@
+// Title: Suspicious Service Creation via sc.exe
+// Description: Detects creation of new Windows services using sc.exe which may be used for persistence.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1543.003 - Create or Modify System Process: Windows Service
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "sc.exe"
+| where ProcessCommandLine has "create"
+| project TimeGenerated, DeviceName, AccountName,
+          ProcessCommandLine, InitiatingProcessFileName
+| order by TimeGenerated desc

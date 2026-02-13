@@ -1,0 +1,15 @@
+// Title: IFEO Debugger Hijacking via reg.exe
+// Description: Detects modification of Image File Execution Options debugger registry key used for persistence.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1546.012 - Image File Execution Options Injection
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "reg.exe"
+| where ProcessCommandLine has @"Image File Execution Options"
+| where ProcessCommandLine has "Debugger"
+| project TimeGenerated, DeviceName, AccountName,
+          ProcessCommandLine, InitiatingProcessFileName
+| order by TimeGenerated desc

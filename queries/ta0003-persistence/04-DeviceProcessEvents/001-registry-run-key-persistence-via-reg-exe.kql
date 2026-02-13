@@ -1,0 +1,18 @@
+// Title: Registry Run Key Persistence via reg.exe
+// Description: Detects modification of Run and RunOnce registry keys using reg.exe which may indicate persistence.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1547.001 - Registry Run Keys / Startup Folder
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "reg.exe"
+| where ProcessCommandLine has_any (
+    @"CurrentVersion\Run",
+    @"CurrentVersion\RunOnce"
+)
+| project TimeGenerated, DeviceName, AccountName,
+          FileName, ProcessCommandLine,
+          InitiatingProcessFileName
+| order by TimeGenerated desc

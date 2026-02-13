@@ -1,0 +1,14 @@
+// Title: Scheduled Task Creation
+// Description: Detects creation of scheduled tasks via schtasks.exe which may indicate persistence.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1053.005 - Scheduled Task
+// Severity: Medium
+
+DeviceProcessEvents
+| where FileName =~ "schtasks.exe"
+| where ProcessCommandLine has "/create"
+| project TimeGenerated, DeviceName, AccountName,
+          ProcessCommandLine, InitiatingProcessFileName
+| order by TimeGenerated desc

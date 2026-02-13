@@ -1,0 +1,18 @@
+// Title: WMI Permanent Event Subscription Creation
+// Description: Detects potential creation of WMI permanent event subscriptions used for stealthy persistence.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1546.003 - Windows Management Instrumentation Event Subscription
+// Severity: High
+
+DeviceProcessEvents
+| where FileName in~ ("wmic.exe", "powershell.exe")
+| where ProcessCommandLine has_any (
+    "CommandLineEventConsumer",
+    "ActiveScriptEventConsumer",
+    "FilterToConsumerBinding"
+)
+| project TimeGenerated, DeviceName, AccountName,
+          FileName, ProcessCommandLine
+| order by TimeGenerated desc
