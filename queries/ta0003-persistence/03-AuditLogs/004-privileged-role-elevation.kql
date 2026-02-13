@@ -1,0 +1,20 @@
+// Title: Privileged Role Elevation
+// Description: Detects assignment to high-privilege Azure AD roles that could enable persistent access.
+// Data Source: AuditLogs
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1098 - Account Manipulation
+// Severity: High
+
+AuditLogs
+| where OperationName contains "Add member to role"
+| where TargetResources has_any (
+    "Global Administrator",
+    "Privileged Role Administrator",
+    "Application Administrator",
+    "Cloud Application Administrator"
+)
+| extend InitiatedByUser = tostring(parse_json(InitiatedBy).user.userPrincipalName)
+| project TimeGenerated, InitiatedByUser,
+          TargetResources, Result
+| order by TimeGenerated desc

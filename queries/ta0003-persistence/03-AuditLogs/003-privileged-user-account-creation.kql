@@ -1,0 +1,19 @@
+// Title: Privileged User Account Creation
+// Description: Detects creation of new user accounts that are subsequently added to privileged roles.
+// Data Source: AuditLogs
+// MITRE ATT&CK:
+//   Tactic: TA0003 - Persistence
+//   Technique: T1136 - Create Account
+// Severity: High
+
+let NewUsers = AuditLogs
+| where OperationName == "Add user"
+| project UserCreationTime = TimeGenerated,
+          NewUser = tostring(TargetResources[0].userPrincipalName);
+AuditLogs
+| where OperationName in ("Add member to role", "Add eligible member to role")
+| extend AddedUser = tostring(TargetResources[0].userPrincipalName)
+| join kind=inner NewUsers on $left.AddedUser == $right.NewUser
+| project UserCreationTime, TimeGenerated,
+          AddedUser, OperationName
+| order by TimeGenerated desc
