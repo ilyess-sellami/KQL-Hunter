@@ -1,0 +1,16 @@
+// Title: Elevated Logon with High Integrity Level
+// Description: Detects interactive logons associated with elevated privileges which may indicate UAC bypass.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1548.002 - Bypass User Account Control
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624
+| where LogonType == 2  // Interactive
+| where ElevatedToken == "Yes"
+| project TimeGenerated, Computer,
+          TargetUserName, LogonType,
+          AuthenticationPackageName
+| order by TimeGenerated desc

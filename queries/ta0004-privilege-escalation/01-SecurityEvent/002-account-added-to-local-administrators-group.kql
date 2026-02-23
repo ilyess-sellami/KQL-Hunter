@@ -1,0 +1,17 @@
+// Title: Account Added to Local Administrators Group (SID-based)
+// Description: Detects users added to the built-in local Administrators group using SID 544.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1098 - Account Manipulation
+// Severity: High
+
+SecurityEvent
+| where EventID == 4732
+| where TargetSid endswith "-544"   // Local Admin
+| project TimeGenerated,
+          Computer,
+          SubjectUserName,
+          MemberName,
+          TargetSid
+| order by TimeGenerated desc

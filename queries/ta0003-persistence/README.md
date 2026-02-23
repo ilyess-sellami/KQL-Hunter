@@ -27,4 +27,3 @@ Persistence detection relies on changes over time rather than single events. The
 |   02     | Windows Security Logs            | `SecurityEvent`        | Scheduled tasks, services |
 |   03     | Azure AD Audit Logs              | `AuditLogs`            | Account & role changes    |
 |   04     | Defender for Endpoint – Process  | `DeviceProcessEvents`  | Persistence execution     |
-|   05     | Defender for Endpoint – File     | `DeviceFileEvents`     | Startup files             |
