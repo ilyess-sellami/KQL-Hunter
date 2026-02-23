@@ -1,0 +1,13 @@
+// Title: Suspicious Privilege Escalation Tools Execution
+// Description: Detects execution of tools commonly used for privilege escalation, such as runas.exe or psexec.exe.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1078 - Valid Accounts / T1059.003 - Command and Scripting Interpreter
+// Severity: High
+
+DeviceProcessEvents
+| where FileName in ("runas.exe", "psexec.exe")
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          FileName, ProcessCommandLine, AccountName
+| order by TimeGenerated desc

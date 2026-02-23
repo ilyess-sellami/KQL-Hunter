@@ -1,0 +1,14 @@
+// Title: High-Integrity PowerShell Execution
+// Description: Detects PowerShell executions with elevated privileges, which may indicate UAC bypass or escalation attempts.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1548.002 - Bypass User Account Control
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessIntegrityLevel == "High"
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          FileName, ProcessCommandLine, AccountName
+| order by TimeGenerated desc
