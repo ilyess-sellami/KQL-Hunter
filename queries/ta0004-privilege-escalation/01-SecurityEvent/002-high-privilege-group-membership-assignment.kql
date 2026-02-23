@@ -1,0 +1,21 @@
+// Title: High-Privilege Group Membership Assignment
+// Description: Detects accounts added to critical privileged groups such as Local Administrators, Domain Admins, or Enterprise Admins.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1098 - Account Manipulation
+// Severity: High
+
+SecurityEvent
+| where EventID in (4732, 4728, 4756)   // Member added to group
+| where TargetSid endswith "-544"      // Local Administrators
+   or TargetSid endswith "-512"        // Domain Admins
+   or TargetSid endswith "-519"        // Enterprise Admins
+| where SubjectUserName !in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")
+| project TimeGenerated,
+          Computer,
+          SubjectUserName,   // Who performed the action
+          MemberName,        // Who was added
+          TargetUserName,    // Group name
+          TargetSid
+| order by TimeGenerated desc

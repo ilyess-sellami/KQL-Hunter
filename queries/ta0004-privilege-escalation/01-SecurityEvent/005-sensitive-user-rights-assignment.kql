@@ -1,0 +1,22 @@
+// Title: Sensitive User Rights Assignment
+// Description: Detects assignment of dangerous privileges such as SeDebug or SeImpersonate to an account.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1548 - Abuse Elevation Control Mechanism
+// Severity: High
+
+SecurityEvent
+| where EventID == 4704   // A user right was assigned
+| where EventData has_any (
+    "SeDebugPrivilege",
+    "SeImpersonatePrivilege",
+    "SeTcbPrivilege",
+    "SeAssignPrimaryTokenPrivilege"
+)
+| project TimeGenerated,
+          Computer,
+          SubjectUserName,   // Who assigned the privilege
+          TargetUserName,    // Who received the privilege
+          EventData
+| order by TimeGenerated desc
