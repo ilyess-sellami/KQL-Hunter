@@ -1,0 +1,15 @@
+// Title: Suspicious Service Installation by User Account
+// Description: Detects service installation events initiated by non-system accounts which may indicate privilege escalation.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1543.003 - Create or Modify System Process: Windows Service
+// Severity: High
+
+SecurityEvent
+| where EventID in (4697, 7045)
+| where SubjectUserName !in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")
+| project TimeGenerated, Computer,
+          SubjectUserName, ServiceName,
+          ServiceFileName
+| order by TimeGenerated desc
