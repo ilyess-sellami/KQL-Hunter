@@ -1,0 +1,14 @@
+// Title: DNS Enumeration Detection
+// Description: Detects unusual DNS queries that may indicate host or service enumeration.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1016 - System Network Configuration Discovery
+// Severity: Medium
+
+DeviceNetworkEvents
+| where RemotePort == 53
+| summarize DNSQueries = count() by DeviceName, RemoteIP, bin(TimeGenerated, 5m)
+| where DNSQueries > 50
+| project TimeGenerated, DeviceName, RemoteIP, DNSQueries
+| order by DNSQueries desc

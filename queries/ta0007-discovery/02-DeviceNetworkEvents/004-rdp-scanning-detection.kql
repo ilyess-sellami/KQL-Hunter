@@ -1,0 +1,14 @@
+// Title: RDP Scanning Detection
+// Description: Detects multiple RDP connection attempts to different hosts in a short timeframe.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1046 - Network Service Scanning
+// Severity: High
+
+DeviceNetworkEvents
+| where RemotePort == 3389
+| summarize Attempts = count() by DeviceName, RemoteIP, bin(TimeGenerated, 10m)
+| where Attempts >= 5
+| project TimeGenerated, DeviceName, RemoteIP, Attempts
+| order by Attempts desc
