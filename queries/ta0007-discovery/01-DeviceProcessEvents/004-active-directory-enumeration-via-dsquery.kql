@@ -1,0 +1,12 @@
+// Title: Active Directory Enumeration via dsquery
+// Description: Detects use of `dsquery` commands for Active Directory object enumeration.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1087.003 - Domain Account Discovery
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "dsquery.exe"
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc

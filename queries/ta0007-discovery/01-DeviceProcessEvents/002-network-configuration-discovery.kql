@@ -1,0 +1,12 @@
+// Title: Network Configuration Discovery
+// Description: Detects execution of network configuration commands used for reconnaissance.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1016 - System Network Configuration Discovery
+// Severity: Medium
+
+DeviceProcessEvents
+| where FileName has_any ("ipconfig.exe","ifconfig")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc

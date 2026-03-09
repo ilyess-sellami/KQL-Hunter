@@ -1,0 +1,12 @@
+// Title: System Information Discovery
+// Description: Detects execution of `systeminfo.exe` which may indicate attackers gathering system details.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1082 - System Information Discovery
+// Severity: Medium
+
+DeviceProcessEvents
+| where FileName =~ "systeminfo.exe"
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc

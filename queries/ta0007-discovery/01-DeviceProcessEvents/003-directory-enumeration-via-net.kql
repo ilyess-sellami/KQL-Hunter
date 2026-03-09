@@ -1,0 +1,13 @@
+// Title: Directory Enumeration via net.exe
+// Description: Detects use of `net user` or `net group` commands to enumerate accounts or groups.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1087 - Account Discovery
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "net.exe"
+| where ProcessCommandLine has_any ("user","group")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc
