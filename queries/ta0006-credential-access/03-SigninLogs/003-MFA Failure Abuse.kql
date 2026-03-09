@@ -1,0 +1,14 @@
+// Title: MFA Failure Abuse
+// Description: Detects multiple MFA failures which may indicate attempts to bypass multi-factor authentication.
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1110 - Brute Force
+// Severity: High
+
+SigninLogs
+| where ResultType == "50126" or ResultType == "50076" // MFA failures
+| summarize Failures = count() by UserPrincipalName, bin(TimeGenerated, 1h)
+| where Failures >= 3
+| project TimeGenerated, UserPrincipalName, Failures
+| order by Failures desc

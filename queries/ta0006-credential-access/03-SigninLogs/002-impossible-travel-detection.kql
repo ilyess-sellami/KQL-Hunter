@@ -1,0 +1,18 @@
+// Title: Impossible Travel Detection
+// Description: Detects successful sign-ins from geographically impossible locations in a short time window and shows the originating IPs.
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1078 - Valid Accounts
+// Severity: High
+
+SigninLogs
+| where ResultType == 0  // Only successful logons
+| extend Location = tostring(LocationDetails.city)
+| extend IP = tostring(IPAddress)  // Add IP address
+| extend User = tostring(UserPrincipalName)
+| serialize
+| extend PrevTime = prev(TimeGenerated), PrevLocation = prev(Location), PrevIP = prev(IP), PrevUser = prev(User)
+| where User == PrevUser and Location != PrevLocation and datetime_diff('hour', TimeGenerated, PrevTime) < 2
+| project TimeGenerated, User, Location, IP, PrevLocation, PrevIP
+| order by TimeGenerated desc
