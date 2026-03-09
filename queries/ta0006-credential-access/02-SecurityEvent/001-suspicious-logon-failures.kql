@@ -1,0 +1,14 @@
+// Title: Suspicious Logon Failures
+// Description: Detects multiple failed logons which may indicate password brute force or spray attacks.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1110.001 - Password Spraying
+// Severity: High
+
+SecurityEvent
+| where EventID == 4625
+| summarize FailedLogons = count() by Account, Computer, bin(TimeGenerated, 1h)
+| where FailedLogons >= 5
+| project TimeGenerated, Account, Computer, FailedLogons
+| order by FailedLogons desc

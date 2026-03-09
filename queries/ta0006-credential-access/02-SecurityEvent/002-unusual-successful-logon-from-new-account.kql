@@ -1,0 +1,14 @@
+// Title: Unusual Successful Logon from New Account
+// Description: Detects first-time successful logons that may indicate compromised credentials.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4624
+| summarize LogonCount = count() by Account, Computer, bin(TimeGenerated, 1d)
+| where LogonCount == 1
+| project TimeGenerated, Account, Computer
+| order by TimeGenerated desc

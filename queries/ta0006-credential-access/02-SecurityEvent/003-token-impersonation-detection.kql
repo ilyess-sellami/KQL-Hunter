@@ -1,0 +1,12 @@
+// Title: Token Impersonation Detection
+// Description: Detects creation of access tokens for another user which may indicate credential misuse.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1134.001 - Access Token Manipulation
+// Severity: High
+
+SecurityEvent
+| where EventID == 4672 or EventID == 4648
+| project TimeGenerated, Account, Computer, Activity
+| order by TimeGenerated desc
