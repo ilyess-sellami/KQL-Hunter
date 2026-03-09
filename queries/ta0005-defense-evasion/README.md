@@ -26,4 +26,3 @@ Defense evasion detection relies on spotting changes that weaken security postur
 |   01     | Defender for Endpoint – Process    | `DeviceProcessEvents`   | Security tool tampering     |
 |   02     | Windows Security Logs              | `SecurityEvent`         | Log clearing, audit disable |
 |   03     | Defender for Endpoint – Registry   | `DeviceRegistryEvents`  | AV / Defender changes       |
-|   04     | Defender for Endpoint – File       | `DeviceFileEvents`      | Hidden / renamed files      |

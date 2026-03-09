@@ -1,0 +1,13 @@
+// Title: Suspicious Encoded PowerShell Execution
+// Description: Detects PowerShell execution with encoded commands which may indicate obfuscation used to evade detection.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1027 - Obfuscated Files or Information
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any ("-enc","-encodedcommand","FromBase64String")
+| project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+| order by TimeGenerated desc

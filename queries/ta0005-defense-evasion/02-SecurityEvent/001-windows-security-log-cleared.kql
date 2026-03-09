@@ -1,0 +1,12 @@
+// Title: Windows Security Log Cleared
+// Description: Detects clearing of the Windows Security event log which may indicate attempts to remove forensic evidence.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1070.001 - Clear Windows Event Logs
+// Severity: High
+
+SecurityEvent
+| where EventID == 1102
+| project TimeGenerated, Computer, Account, Activity
+| order by TimeGenerated desc

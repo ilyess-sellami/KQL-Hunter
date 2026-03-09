@@ -1,0 +1,13 @@
+// Title: Suspicious Event Log Service Stopped
+// Description: Detects stopping of the Windows Event Log service which may indicate attempts to disable logging.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1562.002 - Disable Windows Event Logging
+// Severity: High
+
+SecurityEvent
+| where EventID == 7036
+| where Activity contains "Windows Event Log"
+| project TimeGenerated, Computer, Activity
+| order by TimeGenerated desc

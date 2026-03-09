@@ -1,0 +1,13 @@
+// Title: Windows Event Log Clearing via wevtutil
+// Description: Detects attempts to clear Windows event logs using wevtutil which may indicate defense evasion.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1070.001 - Clear Windows Event Logs
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "wevtutil.exe"
+| where ProcessCommandLine contains "cl"
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc
