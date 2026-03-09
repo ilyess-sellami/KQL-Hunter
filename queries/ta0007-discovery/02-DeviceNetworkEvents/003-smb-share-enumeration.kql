@@ -1,0 +1,13 @@
+// Title: SMB Share Enumeration
+// Description: Detects enumeration of SMB shares which may indicate lateral movement preparation.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1135 - Network Share Discovery
+// Severity: High
+
+DeviceNetworkEvents
+| where RemotePort == 445 or InitiatingProcessCommandLine has "smbclient"
+| where RemoteIP != "127.0.0.1" and RemoteIP != "::1" 
+| project TimeGenerated, DeviceName, InitiatingProcessAccountName, RemoteIP, RemotePort, InitiatingProcessCommandLine
+| order by TimeGenerated desc

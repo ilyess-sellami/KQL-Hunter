@@ -1,0 +1,12 @@
+// Title: Network Scanning via Nmap
+// Description: Detects use of Nmap which may indicate network reconnaissance.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1046 - Network Service Scanning
+// Severity: High
+
+DeviceNetworkEvents
+| where InitiatingProcessFileName =~ "nmap.exe"
+| project TimeGenerated, DeviceName, InitiatingProcessAccountName, RemoteIP, RemotePort, InitiatingProcessCommandLine
+| order by TimeGenerated desc

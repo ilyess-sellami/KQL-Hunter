@@ -1,0 +1,14 @@
+// Title: Port Scanning via Masscan or TCP SYN Flood
+// Description: Detects high volume connections to multiple ports which may indicate port scanning.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1046 - Network Service Scanning
+// Severity: High
+
+DeviceNetworkEvents
+| summarize ConnCount = count() by DeviceName, RemoteIP, bin(TimeGenerated, 5m)
+| where ConnCount > 200 
+| where RemoteIP != "127.0.0.1" and RemoteIP != "::1" 
+| project TimeGenerated, DeviceName, RemoteIP, ConnCount
+| order by ConnCount desc
