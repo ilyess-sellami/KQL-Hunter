@@ -26,4 +26,3 @@ C2 detection relies on network behavior and communication patterns:
 |  01      | Defender for Endpoint – Network | `DeviceNetworkEvents` | Beaconing & outbound C2 |
 |  02      | Network / Firewall Logs         | `CommonSecurityLog`   | Egress traffic          |
 |  03      | Defender for Endpoint – Process | `DeviceProcessEvents` | LOLBins for C2          |
-|  04      | Defender for Endpoint – File    | `DeviceFileEvents`    | Payload download        |
