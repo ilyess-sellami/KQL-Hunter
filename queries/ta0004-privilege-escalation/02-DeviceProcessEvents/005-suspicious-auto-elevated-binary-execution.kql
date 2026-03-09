@@ -1,0 +1,18 @@
+// Title: Suspicious Auto-Elevated Binary Execution (Potential UAC Bypass)
+// Description: Detects execution of known auto-elevated Windows binaries that may be abused to bypass UAC and escalate privileges.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1548.002 - Bypass User Account Control
+// Severity: High
+
+DeviceProcessEvents
+| where FileName in ("fodhelper.exe","computerdefaults.exe","sdclt.exe","eventvwr.exe")
+| where InitiatingProcessFileName !in ("explorer.exe","svchost.exe")
+| project TimeGenerated,
+          DeviceName,
+          AccountName,
+          FileName,
+          ProcessCommandLine,
+          InitiatingProcessFileName
+| order by TimeGenerated desc

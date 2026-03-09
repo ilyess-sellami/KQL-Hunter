@@ -1,0 +1,13 @@
+// Title: Suspicious Service Binary Execution
+// Description: Detects execution of binaries typically associated with service creation or escalation via services (sc.exe, installutil.exe).
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1543.003 - Create or Modify System Process: Windows Service
+// Severity: High
+
+DeviceProcessEvents
+| where FileName in ("sc.exe", "installutil.exe")
+| project TimeGenerated, DeviceName, InitiatingProcessFileName,
+          FileName, ProcessCommandLine, AccountName
+| order by TimeGenerated desc
