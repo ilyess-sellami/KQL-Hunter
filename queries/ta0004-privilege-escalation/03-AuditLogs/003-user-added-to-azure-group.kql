@@ -1,0 +1,14 @@
+// Title: User Added to Azure AD Group
+// Description: Detects users added to Azure AD groups which may enable privilege escalation.
+// Data Source: AuditLogs
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1098 - Account Manipulation
+// Severity: High
+
+AuditLogs
+| where OperationName == "Add member to group"
+| extend GroupName = tostring(TargetResources[0].displayName)
+| extend InitiatedByUser = tostring(parse_json(InitiatedBy).user.userPrincipalName)
+| project TimeGenerated, InitiatedByUser, GroupName, Result
+| order by TimeGenerated desc

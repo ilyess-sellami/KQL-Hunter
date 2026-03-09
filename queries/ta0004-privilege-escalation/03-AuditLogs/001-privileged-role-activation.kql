@@ -1,0 +1,16 @@
+// Title: Privileged Role Activation via PIM
+// Description: Detects activation of privileged roles through Privileged Identity Management which may indicate privilege escalation.
+// Data Source: AuditLogs
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1078 - Valid Accounts
+// Severity: High
+
+AuditLogs
+| where Category == "RoleManagement"
+| where OperationName has_any ("Activate", "Add member to role", "Add eligible member")
+| extend InitiatedByUser = tostring(parse_json(InitiatedBy).user.userPrincipalName)
+| extend RoleName = tostring(TargetResources[0].displayName)
+| extend TargetUser = tostring(TargetResources[0].userPrincipalName)
+| project TimeGenerated, InitiatedByUser, TargetUser, RoleName, OperationName, Result
+| order by TimeGenerated desc

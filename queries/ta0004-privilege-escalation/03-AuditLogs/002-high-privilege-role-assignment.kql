@@ -1,0 +1,15 @@
+// Title: High-Privilege Role Assignment
+// Description: Detects assignment of critical Azure AD roles such as Global Administrator, which may indicate privilege escalation.
+// Data Source: AuditLogs
+// MITRE ATT&CK:
+//   Tactic: TA0004 - Privilege Escalation
+//   Technique: T1098 - Account Manipulation
+// Severity: High
+
+AuditLogs
+| where OperationName in ("Add member to role","Add eligible member to role")
+| extend InitiatedByUser = tostring(parse_json(InitiatedBy).user.userPrincipalName)
+| extend RoleAssigned = tostring(TargetResources[0].displayName)
+| where RoleAssigned has_any ("Global Administrator","Privileged Role Administrator","Security Administrator")
+| project TimeGenerated, InitiatedByUser, RoleAssigned, Result
+| order by TimeGenerated desc
