@@ -1,0 +1,13 @@
+// Title: LSASS Memory Dump Attempt
+// Description: Detects processes accessing LSASS memory, a common technique for credential dumping.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0006 - Credential Access
+//   Technique: T1003.001 - LSASS Memory
+// Severity: High
+
+DeviceProcessEvents
+| where ProcessCommandLine has_any ("lsass","lsass.exe")
+| where InitiatingProcessFileName has_any ("procdump.exe","rundll32.exe","mimikatz.exe","cmd.exe","powershell.exe","wmic.exe","taskmgr.exe","rubeus.exe")
+| project TimeGenerated, DeviceName, AccountName, InitiatingProcessFileName, ProcessCommandLine
+| order by TimeGenerated desc

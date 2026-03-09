@@ -26,5 +26,3 @@ Credential access detection requires endpoint visibility and identity context:
 |  01      | Defender for Endpoint – Process  | `DeviceProcessEvents`  | LSASS dumping, credential tools |
 |  02      | Windows Security Logs            | `SecurityEvent`        | Credential usage and abuse      |
 |  03      | Azure AD Sign-in Logs            | `SigninLogs`           | Password spraying, MFA abuse    |
-|  04      | Defender for Endpoint – File     | `DeviceFileEvents`     | Credential files and dumps      |
-|  05      | Defender for Endpoint – Registry | `DeviceRegistryEvents` | Credential storage access       |
