@@ -1,0 +1,14 @@
+// Title: Remote Desktop Connection Enumeration
+// Description: Detects repeated RDP logons which may indicate an attacker discovering reachable hosts.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1018 - Remote System Discovery
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624 and LogonType == 10  // Remote logon
+| summarize Count = count() by Account, Computer, bin(TimeGenerated, 1h)
+| where Count > 3
+| project TimeGenerated, Account, Computer, Count
+| order by Count desc

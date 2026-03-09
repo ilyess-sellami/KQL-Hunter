@@ -1,0 +1,12 @@
+// Title: Logged on Users Enumeration
+// Description: Detects attempts to list AD group memberships via log events.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1069 - Permission Groups Discovery
+// Severity: High
+
+SecurityEvent
+| where EventID == 4732 or EventID == 4735
+| project TimeGenerated, Account, Computer, Activity
+| order by TimeGenerated desc

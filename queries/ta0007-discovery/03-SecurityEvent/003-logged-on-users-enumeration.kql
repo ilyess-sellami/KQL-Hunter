@@ -1,0 +1,14 @@
+// Title: Logged on Users Enumeration
+// Description: Detects repeated queries for logged-on users via EventID 4648 (logon attempts) that may indicate discovery.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1087.001 - Local Account Discovery
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4648
+| summarize Attempts = count() by Account, Computer, bin(TimeGenerated, 1h)
+| where Attempts >= 5
+| project TimeGenerated, Account, Computer, Attempts
+| order by Attempts desc

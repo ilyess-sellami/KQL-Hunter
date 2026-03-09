@@ -1,0 +1,14 @@
+// Title: Active Directory Account Enumeration
+// Description: Detects repeated queries for AD user accounts which may indicate account discovery.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1087 - Account Discovery
+// Severity: High
+
+SecurityEvent
+| where EventID == 4720 or EventID == 4722 or EventID == 4723 // account creation / enable / password attempts
+| summarize Count = count() by Account, Computer, bin(TimeGenerated, 1h)
+| where Count > 5
+| project TimeGenerated, Account, Computer, Count
+| order by Count desc

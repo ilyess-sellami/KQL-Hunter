@@ -1,0 +1,12 @@
+// Title: Local Administrator Group Discovery
+// Description: Detects enumeration of local admin groups via SecurityEvent logs.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0007 - Discovery
+//   Technique: T1087.002 - Local Group Discovery
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 4735 or EventID == 4737
+| project TimeGenerated, Account, Computer, Activity
+| order by TimeGenerated desc
