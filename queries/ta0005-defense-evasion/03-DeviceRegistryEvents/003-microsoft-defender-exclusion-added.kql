@@ -1,0 +1,12 @@
+// Title: Microsoft Defender Exclusion Added
+// Description: Detects additions to Microsoft Defender exclusion paths which may allow malware to evade antivirus scanning.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1562.001 - Disable or Modify Security Tools
+// Severity: Medium
+
+DeviceRegistryEvents
+| where RegistryKey contains @"Windows Defender\Exclusions"
+| project TimeGenerated, DeviceName, RegistryKey, RegistryValueName, InitiatingProcessFileName
+| order by TimeGenerated desc

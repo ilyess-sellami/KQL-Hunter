@@ -1,0 +1,13 @@
+// Title: Windows Defender Disabled via Registry
+// Description: Detects registry modifications that disable Microsoft Defender Antivirus which may indicate defense evasion.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1562.001 - Disable or Modify Security Tools
+// Severity: High
+
+DeviceRegistryEvents
+| where RegistryKey contains @"SOFTWARE\Policies\Microsoft\Windows Defender"
+| where RegistryValueName == "DisableAntiSpyware"
+| project TimeGenerated, DeviceName, RegistryKey, RegistryValueData, InitiatingProcessFileName
+| order by TimeGenerated desc

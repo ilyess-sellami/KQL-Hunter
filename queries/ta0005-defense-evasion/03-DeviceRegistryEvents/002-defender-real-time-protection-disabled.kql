@@ -1,0 +1,13 @@
+// Title: Defender Real-Time Protection Disabled
+// Description: Detects registry modifications disabling Microsoft Defender real-time protection which may indicate defense evasion.
+// Data Source: DeviceRegistryEvents
+// MITRE ATT&CK:
+//   Tactic: TA0005 - Defense Evasion
+//   Technique: T1562.001 - Disable or Modify Security Tools
+// Severity: High
+
+DeviceRegistryEvents
+| where RegistryKey contains @"Windows Defender\Real-Time Protection"
+| where RegistryValueName contains "Disable"
+| project TimeGenerated, DeviceName, RegistryKey, RegistryValueName, RegistryValueData
+| order by TimeGenerated desc
