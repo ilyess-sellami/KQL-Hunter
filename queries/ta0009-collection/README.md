@@ -25,6 +25,4 @@ Collection detection relies on monitoring data access patterns:
 | -------- | ------------------------------- | --------------------- | --------------------- |
 |  01      | Defender for Endpoint – File    | `DeviceFileEvents`    | Sensitive file access |
 |  02      | Defender for Endpoint – Process | `DeviceProcessEvents` | Data harvesting tools |
-|  03      | Defender for Office 365         | `EmailEvents`         | Mailbox access        |
-|  04      | Cloud Application Logs          | `CloudAppEvents`      | Cloud data access     |
 |  05      | Windows Security Logs           | `SecurityEvent`       | File share access     |
