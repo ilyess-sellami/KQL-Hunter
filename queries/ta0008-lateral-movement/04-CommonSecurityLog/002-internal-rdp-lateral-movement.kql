@@ -1,0 +1,15 @@
+// Title: Internal RDP Lateral Movement
+// Description: Detects RDP traffic between internal systems which may indicate attacker pivoting across hosts.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.001 - Remote Desktop Protocol
+// Severity: High
+
+CommonSecurityLog
+| where DestinationPort == 3389
+| where ipv4_is_private(SourceIP) and ipv4_is_private(DestinationIP)
+| summarize RDPAttempts=count() by SourceIP, DestinationIP, bin(TimeGenerated, 10m)
+| where RDPAttempts > 5
+| project TimeGenerated, SourceIP, DestinationIP, RDPAttempts
+| order by RDPAttempts desc

@@ -1,0 +1,15 @@
+// Title: Suspicious Internal Administrative Tool Traffic
+// Description: Detects unusual internal traffic on administrative ports which may indicate remote service execution.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021 - Remote Services
+// Severity: Medium
+
+CommonSecurityLog
+| where DestinationPort in (135,139,445,5985,5986)
+| where ipv4_is_private(SourceIP) and ipv4_is_private(DestinationIP)
+| summarize AdminTraffic=count() by SourceIP, DestinationIP, DestinationPort, bin(TimeGenerated, 10m)
+| where AdminTraffic > 8
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort, AdminTraffic
+| order by AdminTraffic desc

@@ -1,0 +1,15 @@
+// Title: Suspicious SMB East-West Traffic
+// Description: Detects internal SMB connections between hosts which may indicate lateral movement via administrative shares.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.002 - SMB/Windows Admin Shares
+// Severity: High
+
+CommonSecurityLog
+| where DestinationPort == 445
+| where ipv4_is_private(SourceIP) and ipv4_is_private(DestinationIP)
+| summarize ConnectionCount=count() by SourceIP, DestinationIP, bin(TimeGenerated, 10m)
+| where ConnectionCount > 10
+| project TimeGenerated, SourceIP, DestinationIP, ConnectionCount
+| order by ConnectionCount desc
