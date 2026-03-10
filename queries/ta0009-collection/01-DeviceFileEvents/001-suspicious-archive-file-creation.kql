@@ -1,0 +1,12 @@
+// Title: Suspicious Archive File Creation
+// Description: Detects creation of archive files which may indicate staging of collected data.
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1560 - Archive Collected Data
+// Severity: High
+
+DeviceFileEvents
+| where FileName endswith ".zip" or FileName endswith ".rar" or FileName endswith ".7z"
+| project TimeGenerated, DeviceName, RequestAccountName, FileName, FolderPath, ActionType
+| order by TimeGenerated desc
