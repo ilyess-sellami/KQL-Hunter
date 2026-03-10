@@ -1,0 +1,13 @@
+// Title: SMB Connections Between Endpoints
+// Description: Detects SMB traffic between internal hosts which may indicate lateral movement via file shares.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.002 - SMB/Windows Admin Shares
+// Severity: High
+
+DeviceNetworkEvents
+| where RemotePort == 445
+| where RemoteIP != "::1" and RemoteIP != "127.0.0.1" // Local Machine IP
+| project TimeGenerated, DeviceName, RemoteIP, RemotePort, InitiatingProcessAccountName
+| order by TimeGenerated desc

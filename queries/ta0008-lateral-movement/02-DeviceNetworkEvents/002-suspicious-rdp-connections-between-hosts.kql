@@ -1,0 +1,14 @@
+// Title: Suspicious RDP Connections Between Hosts
+// Description: Detects Remote Desktop connections between endpoints which may indicate attacker pivoting.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.001 - Remote Desktop Protocol
+// Severity: High
+
+DeviceNetworkEvents
+| where RemotePort == 3389
+| summarize Attempts=count() by DeviceName, RemoteIP, bin(TimeGenerated, 10m)
+| where Attempts > 3
+| project TimeGenerated, DeviceName, RemoteIP, Attempts
+| order by Attempts desc
