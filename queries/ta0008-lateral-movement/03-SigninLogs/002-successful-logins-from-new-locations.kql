@@ -1,0 +1,14 @@
+// Title: Successful Logins From New Locations
+// Description: Detects successful sign-ins from locations not previously seen for a user which may indicate account compromise and lateral movement.
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1078 - Valid Accounts
+// Severity: Medium
+
+SigninLogs
+| extend Location = tostring(LocationDetails.countryOrRegion)
+| summarize Locations=dcount(Location) by UserPrincipalName
+| where Locations > 3
+| project UserPrincipalName, Locations
+| order by Locations desc

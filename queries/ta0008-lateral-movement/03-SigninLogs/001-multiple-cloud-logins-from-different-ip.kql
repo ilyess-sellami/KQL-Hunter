@@ -1,0 +1,13 @@
+// Title: Multiple Cloud Logins From Different IPs
+// Description: Detects multiple sign-ins from different IP addresses within a short time period which may indicate lateral movement in cloud environments.
+// Data Source: SigninLogs
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1078 - Valid Accounts
+// Severity: High
+
+SigninLogs
+| summarize IPCount=dcount(IPAddress) by UserPrincipalName, bin(TimeGenerated, 10m)
+| where IPCount > 3
+| project TimeGenerated, UserPrincipalName, IPCount
+| order by IPCount desc
