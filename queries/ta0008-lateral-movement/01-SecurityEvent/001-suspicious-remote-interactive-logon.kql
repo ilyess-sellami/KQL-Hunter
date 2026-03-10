@@ -1,0 +1,13 @@
+// Title: Suspicious Remote Interactive Logon
+// Description: Detects remote interactive logons which may indicate RDP-based lateral movement between systems.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.001 - Remote Desktop Protocol
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624
+| where LogonType == 10
+| project TimeGenerated, Account, Computer, IpAddress, LogonType
+| order by TimeGenerated desc

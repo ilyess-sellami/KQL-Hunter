@@ -1,0 +1,15 @@
+// Title: Suspicious Network Logon Activity
+// Description: Detects multiple network logons which may indicate SMB-based lateral movement.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1021.002 - SMB/Windows Admin Shares
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624
+| where LogonType == 3
+| summarize LogonCount=count() by Account, Computer, IpAddress, bin(TimeGenerated, 10m)
+| where LogonCount > 5
+| project TimeGenerated, Account, Computer, IpAddress, LogonCount
+| order by LogonCount desc

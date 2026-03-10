@@ -1,0 +1,13 @@
+// Title: NTLM Authentication Between Hosts
+// Description: Detects NTLM authentication events which may indicate pass-the-hash lateral movement attempts.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0008 - Lateral Movement
+//   Technique: T1550.002 - Pass the Hash
+// Severity: High
+
+SecurityEvent
+| where EventID == 4624
+| where AuthenticationPackageName == "NTLM"
+| project TimeGenerated, Account, Computer, IpAddress, AuthenticationPackageName
+| order by TimeGenerated desc
