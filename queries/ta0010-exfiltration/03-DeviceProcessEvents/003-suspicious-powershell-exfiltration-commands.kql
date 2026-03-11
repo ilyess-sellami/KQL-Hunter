@@ -1,0 +1,13 @@
+// Title: Suspicious PowerShell Exfiltration Commands
+// Description: Detects PowerShell commands used for uploading data or sending files externally.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over C2 Channel
+// Severity: High
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any ("Invoke-WebRequest","Invoke-RestMethod","Start-BitsTransfer","Send-MailMessage")
+| project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+| order by TimeGenerated desc

@@ -1,0 +1,12 @@
+// Title: Suspicious Cloud Sync Tools
+// Description: Detects execution of cloud synchronization tools (OneDrive, Google Drive, Dropbox) which may indicate data exfiltration.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1567.002 - Exfiltration to Cloud Storage
+// Severity: High
+
+DeviceProcessEvents
+| where FileName has_any ("onedrive.exe","googledrive.exe","dropbox.exe","boxsync.exe")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc

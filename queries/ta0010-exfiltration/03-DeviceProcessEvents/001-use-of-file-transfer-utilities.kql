@@ -1,0 +1,12 @@
+// Title: Use of File Transfer Utilities
+// Description: Detects execution of file transfer tools such as FTP/SCP clients which may indicate exfiltration activity.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over C2 Channel
+// Severity: High
+
+DeviceProcessEvents
+| where FileName has_any ("ftp.exe","pscp.exe","winscp.exe","curl.exe","wget.exe")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc
