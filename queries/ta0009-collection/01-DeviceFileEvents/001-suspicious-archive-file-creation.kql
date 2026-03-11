@@ -6,7 +6,29 @@
 //   Technique: T1560 - Archive Collected Data
 // Severity: High
 
+let KnownGoodProcesses = dynamic([]); // e.g., ["backup.exe", "logshipper.exe"]
+let AllowedFolders = dynamic([
+    "\\AppData\\Local\\Temp\\", // Common for application temporary files
+    "\\SoftwareDistribution\\Download\\" // Windows Update
+]);
 DeviceFileEvents
-| where FileName endswith ".zip" or FileName endswith ".rar" or FileName endswith ".7z"
-| project TimeGenerated, DeviceName, RequestAccountName, FileName, FolderPath, ActionType
-| order by TimeGenerated desc
+| where ActionType == "FileCreated"
+| where FileName endswith ".zip" or
+        FileName endswith ".rar" or
+        FileName endswith ".7z" or
+        FileName endswith ".tar" or
+        FileName endswith ".gz"
+// Focus on command-line utilities often used for collection
+| where InitiatingProcessFileName in~ ("7z.exe", "rar.exe", "zip.exe", "tar.exe", "winrar.exe")
+// Exclude known good processes and folders to reduce noise
+| where not(InitiatingProcessFileName in~ (KnownGoodProcesses))
+| where not(FolderPath has_any (AllowedFolders))
+| project
+    TimeGenerated,
+    DeviceName,
+    RequestAccountName,
+    InitiatingProcessFileName,
+    InitiatingProcessCommandLine,
+    FileName,
+    FolderPath,
+    SHA1

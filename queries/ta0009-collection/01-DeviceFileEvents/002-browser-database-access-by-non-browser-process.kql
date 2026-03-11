@@ -1,0 +1,44 @@
+// Title: Browser Database Access by Non-Browser Process
+// Description: This query hunts for instances where sensitive browser database files (containing cookies, history, and saved credentials).
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1560 - Archive Collected Data
+// Severity: High
+
+let BrowserDbFiles = dynamic([
+    "Login Data",
+    "Cookies",
+    "Web Data",
+    "History", // Chrome/Edge/Brave
+    "logins.json",
+    "key4.db",
+    "places.sqlite",
+    "cookies.sqlite" // Firefox
+]);
+let KnownGoodProcesses = dynamic([
+    "chrome.exe",
+    "msedge.exe",
+    "firefox.exe",
+    "brave.exe"
+    // "backup_tool.exe", "security_scanner.exe" // Add legitimate tools here
+]);
+DeviceFileEvents
+// A FileCreated event can indicate a file was copied for staging.
+| where ActionType == "FileCreated"
+// Filter for common browser database file names.
+| where FileName in~ (BrowserDbFiles)
+// Focus on user profile directories where this data is stored.
+| where FolderPath has "\\Users\\" and
+        (FolderPath has "\\AppData\\Local\\" or FolderPath has "\\AppData\\Roaming\\")
+// Exclude access by the browser processes themselves.
+| where not(InitiatingProcessFileName in~ (KnownGoodProcesses))
+| project
+    TimeGenerated,
+    DeviceName,
+    RequestAccountName,
+    InitiatingProcessFileName,
+    InitiatingProcessCommandLine,
+    FileName,
+    FolderPath,
+    SHA1
