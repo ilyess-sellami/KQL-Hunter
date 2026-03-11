@@ -1,0 +1,15 @@
+// Title: Suspicious Protocol Usage for Exfiltration
+// Description: Detects outbound traffic using uncommon protocols that may indicate covert data exfiltration.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over C2 Channel
+// Severity: Medium
+
+DeviceNetworkEvents
+| where RemotePort !in (80,443,53,22)
+| summarize Connections=count() by DeviceName, RemoteIP, RemotePort, bin(TimeGenerated, 1h)
+| where Connections > 10
+| where isnotempty(RemoteIP) and isnotempty(RemotePort)
+| project TimeGenerated, DeviceName, RemoteIP, RemotePort, Connections
+| order by Connections desc

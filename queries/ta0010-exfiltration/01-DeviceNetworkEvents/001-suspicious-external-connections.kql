@@ -1,0 +1,13 @@
+// Title: Suspicious External Connections
+// Description: Detects outbound connections to rare or unusual external IPs which may indicate data exfiltration.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over C2 Channel
+// Severity: High
+
+DeviceNetworkEvents
+| summarize ConnectionCount=count() by DeviceName, RemoteIP, bin(TimeGenerated, 1h)
+| where ConnectionCount > 20 and RemoteIP !in ("127.0.0.1","::1")
+| project TimeGenerated, DeviceName, RemoteIP, ConnectionCount
+| order by ConnectionCount desc
