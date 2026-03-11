@@ -1,0 +1,12 @@
+// Title: Archive Utilities Used for Data Collection
+// Description: Detects execution of archive or compression tools which may indicate data collection for exfiltration.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1560 - Archive Collected Data
+// Severity: High
+
+DeviceProcessEvents
+| where FileName has_any ("7z.exe","winrar.exe","rar.exe","tar.exe","zip.exe")
+| project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by TimeGenerated desc

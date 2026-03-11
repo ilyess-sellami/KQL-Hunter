@@ -1,0 +1,13 @@
+// Title: Suspicious PowerShell Data Harvesting
+// Description: Detects PowerShell commands used to enumerate directories, copy files, or gather system data.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1005 - Data from Local System
+// Severity: Medium
+
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any ("Get-ChildItem","Copy-Item","dir","ls","Export-Csv")
+| project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+| order by TimeGenerated desc

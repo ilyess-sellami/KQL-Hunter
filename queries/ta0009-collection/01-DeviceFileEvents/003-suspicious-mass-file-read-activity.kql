@@ -1,0 +1,13 @@
+// Title: Suspicious Mass File Read Activity
+// Description: Detects when a user reads or copies a large number of files in a short period which may indicate data collection for exfiltration.
+// Data Source: DeviceFileEvents
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1005 - Data from Local System
+// Severity: High
+
+DeviceFileEvents
+| summarize FileAccessCount=count() by DeviceName, RequestAccountName, FolderPath, bin(TimeGenerated, 10m)
+| where FileAccessCount > 50
+| project TimeGenerated, DeviceName, RequestAccountName, FolderPath, FileAccessCount
+| order by FileAccessCount desc
