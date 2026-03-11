@@ -1,0 +1,13 @@
+// Title: Large File Transfers via Firewall
+// Description: Detects unusually large outbound data transfers through network devices indicating potential exfiltration.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over Network Medium
+// Severity: High
+
+CommonSecurityLog
+| summarize BytesSent=sum(SentBytes) by SourceIP, DestinationIP, bin(TimeGenerated, 10m)
+| where BytesSent > 500000000
+| project TimeGenerated, SourceIP, DestinationIP, BytesSent
+| order by BytesSent desc

@@ -1,0 +1,14 @@
+// Title: Unusual Protocol Traffic to External Hosts
+// Description: Detects outbound connections using uncommon ports/protocols which may indicate covert exfiltration.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over Network Medium
+// Severity: Medium
+
+CommonSecurityLog
+| where DestinationPort !in (80,443,53,22)
+| summarize Connections=count() by SourceIP, DestinationIP, DestinationPort, bin(TimeGenerated, 1h)
+| where Connections > 10
+| project TimeGenerated, SourceIP, DestinationIP, DestinationPort, Connections
+| order by Connections desc

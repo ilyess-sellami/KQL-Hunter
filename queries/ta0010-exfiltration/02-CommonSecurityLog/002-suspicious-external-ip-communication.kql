@@ -1,0 +1,13 @@
+// Title: Suspicious External IP Communication
+// Description: Detects internal hosts communicating with rare external destinations, which may indicate exfiltration channels.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0010 - Exfiltration
+//   Technique: T1041 - Exfiltration Over Network Medium
+// Severity: High
+
+CommonSecurityLog
+| summarize ConnectionCount=count() by SourceIP, DestinationIP, bin(TimeGenerated, 1h)
+| where ConnectionCount > 20
+| project TimeGenerated, SourceIP, DestinationIP, ConnectionCount
+| order by ConnectionCount desc
