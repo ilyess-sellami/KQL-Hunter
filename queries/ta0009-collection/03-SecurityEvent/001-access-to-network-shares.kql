@@ -1,0 +1,12 @@
+// Title: Access to Network Shares
+// Description: Detects when users access network shares which may indicate data collection from shared resources.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1039 - Data from Network Shared Drive
+// Severity: High
+
+SecurityEvent
+| where EventID == 5140
+| project TimeGenerated, Account, Computer, ShareName, IpAddress
+| order by TimeGenerated desc

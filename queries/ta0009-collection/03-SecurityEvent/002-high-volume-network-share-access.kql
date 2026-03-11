@@ -1,0 +1,14 @@
+// Title: High Volume Network Share Access
+// Description: Detects users accessing a large number of files on network shares in a short period, which may indicate bulk data collection.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1039 - Data from Network Shared Drive
+// Severity: High
+
+SecurityEvent
+| where EventID == 5140
+| summarize AccessCount=count() by Account, Computer, ShareName, bin(TimeGenerated, 10m)
+| where AccessCount > 50
+| project TimeGenerated, Account, Computer, ShareName, AccessCount
+| order by AccessCount desc

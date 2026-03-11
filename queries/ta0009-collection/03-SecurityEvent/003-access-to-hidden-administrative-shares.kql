@@ -1,0 +1,13 @@
+// Title: Access to Hidden Administrative Shares
+// Description: Detects access to administrative shares (ending with $) which may indicate stealthy data collection or reconnaissance.
+// Data Source: SecurityEvent
+// MITRE ATT&CK:
+//   Tactic: TA0009 - Collection
+//   Technique: T1039 - Data from Network Shared Drive
+// Severity: Medium
+
+SecurityEvent
+| where EventID == 5140
+| where ShareName has "$"
+| project TimeGenerated, Account, Computer, ShareName, IpAddress
+| order by TimeGenerated desc
