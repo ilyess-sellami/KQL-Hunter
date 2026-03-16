@@ -1,0 +1,14 @@
+// Title: Large Outbound Data Transfers
+// Description: Detects significant outbound data transfers that may indicate exfiltration via command and control infrastructure.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1041 - Exfiltration Over C2 Channel
+// Severity: High
+
+CommonSecurityLog
+| where TimeGenerated > ago(24h)
+| where DeviceAction == "Allow"
+| summarize total_bytes=sum(SentBytes) by SourceIP, DestinationIP
+| where total_bytes > 500000000
+| sort by total_bytes desc

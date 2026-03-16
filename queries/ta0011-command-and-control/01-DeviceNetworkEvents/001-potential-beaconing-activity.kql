@@ -1,0 +1,17 @@
+// Title: Potential Beaconing Activity
+// Description: Detects systems communicating with the same remote IP at regular intervals which may indicate command and control beaconing.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1071 - Application Layer Protocol
+// Severity: High
+
+DeviceNetworkEvents
+| where TimeGenerated > ago(24h)
+| where ActionType == "ConnectionSuccess"
+| where RemoteIP != "127.0.0.1" and RemoteIP != "::1"
+| summarize connection_count=count(), min_time=min(TimeGenerated), max_time=max(TimeGenerated)
+by DeviceName, RemoteIP
+| extend interval = datetime_diff("second", max_time, min_time) / connection_count
+| where connection_count > 20 and interval between (30 .. 600)
+| sort by connection_count desc

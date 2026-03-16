@@ -1,0 +1,15 @@
+// Title: Unusual Outbound Ports
+// Description: Detects outbound connections using uncommon ports which may indicate command and control channels bypassing standard protocols.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1571 - Non-Standard Port
+// Severity: Medium
+
+CommonSecurityLog
+| where TimeGenerated > ago(24h)
+| where DeviceAction == "Allow"
+| where DestinationPort !in (80,443,53,25)
+| summarize connections=count() by SourceIP, DestinationIP, DestinationPort
+| where connections > 20
+| sort by connections desc

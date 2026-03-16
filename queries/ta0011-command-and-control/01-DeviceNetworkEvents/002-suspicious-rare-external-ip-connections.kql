@@ -1,0 +1,18 @@
+// Title: Suspicious Rare External IP Connections
+// Description: Detects connections to external IPs not observed in the environment baseline which may indicate new command and control infrastructure.
+// Data Source: DeviceNetworkEvents
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1071 - Application Layer Protocol
+// Severity: Medium
+
+let baseline =
+DeviceNetworkEvents
+| where TimeGenerated  between (ago(14d) .. ago(1d))
+| summarize by RemoteIP;
+DeviceNetworkEvents
+| where TimeGenerated > ago(24h)
+| where RemoteIP !in (baseline)
+| where RemoteIPType == "Public"
+| summarize connection_count=count() by DeviceName, RemoteIP
+| where connection_count > 5

@@ -1,0 +1,14 @@
+// Title: Repeated Blocked Connections to External Hosts
+// Description: Detects repeated denied outbound connection attempts which may indicate malware attempting to establish command and control communication.
+// Data Source: CommonSecurityLog
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1071 - Application Layer Protocol
+// Severity: Medium
+
+CommonSecurityLog
+| where TimeGenerated > ago(24h)
+| where DeviceAction == "Deny"
+| summarize attempts=count() by SourceIP, DestinationIP
+| where attempts > 50
+| sort by attempts desc
