@@ -1,0 +1,13 @@
+// Title: Suspicious MSHTA Remote Script Execution
+// Description: Detects mshta executing remote scripts which may indicate command and control communication.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1218.005 - Mshta
+// Severity: High
+
+DeviceProcessEvents
+| where TimeGenerated > ago(24h)
+| where FileName == "mshta.exe"
+| where ProcessCommandLine contains "http"
+| project TimeGenerated, DeviceName, ProcessCommandLine

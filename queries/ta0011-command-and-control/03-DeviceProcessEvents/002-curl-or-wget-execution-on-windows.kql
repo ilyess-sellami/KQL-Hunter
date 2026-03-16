@@ -1,0 +1,12 @@
+// Title: Curl or Wget Execution on Windows
+// Description: Detects execution of curl or wget utilities which may be used to retrieve commands or payloads from command and control servers.
+// Data Source: DeviceProcessEvents
+// MITRE ATT&CK:
+//   Tactic: TA0011 - Command and Control
+//   Technique: T1105 - Ingress Tool Transfer
+// Severity: Medium
+
+DeviceProcessEvents
+| where Timestamp > ago(24h)
+| where FileName in ("curl.exe","wget.exe")
+| project Timestamp, DeviceName, AccountName, ProcessCommandLine
